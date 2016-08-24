@@ -1,0 +1,42 @@
+<section class="row" data-ng-controller="SubcategoriesController" data-ng-init="find(); setState('Sub Category'); auth();">
+     <div ng-include="'./modules/categories/views/partials/admin-header.client.view.html'"></div>
+    <div class="col-md-10">
+   
+    <div class="page-header">
+        <h1>Subcategories</h1>
+    </div>
+    <div class="list-group">
+        <a href="/#!/subcategories/create" class="btn btn-primary">Create</a>
+        <br />
+        <table class="table table-hover">
+           <thead>
+             <tr>
+               <th>Sub Category</th>
+               <th>Category</th>
+               <th>Active</th>
+               <th>Action</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr ng-repeat="subcategory in subcategories">
+               <td>{{subcategory.name}}</td>
+               <td>{{subcategory.category.name}}</td>
+               <td>{{subcategory.isActive? 'Yes' : 'No'}}</td>
+               <td><a data-ng-href="#!/subcategories/{{subcategory._id}}/edit">Edit</a>&nbsp;</td>
+             </tr>
+             
+           </tbody>
+         </table>
+        <!-- <a data-ng-repeat="subcategory in subcategories" data-ng-href="#!/subcategories/{{subcategory._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="subcategory.created | date:'medium'"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="subcategory.name"></h4>
+        </a> -->
+    </div>
+   <!--  <div class="alert alert-warning text-center" data-ng-hide="!subcategories.$resolved || subcategories.length">
+    	No Subcategories yet, why don't you <a href="/#!/subcategories/create">create one</a>?
+    </div> -->
+</div>
+</section>

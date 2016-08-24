@@ -1,0 +1,73 @@
+<section class="row well" data-ng-controller="AuthenticationController" ng-init="initUserProfile(); loadCountries(); getListOfCities();">
+       <div class="row">
+          <div class="col-md-12">
+          <h2 class="">Choose Memebership</h2>
+            <!-- <center> -->
+              <!-- <a class="hyperlink btn btn-info btn-lg" data-ng-click="updateUserRoles('freelancer')">Register as a Freelancer</a>
+              <a class="hyperlink btn btn-info btn-lg" data-ng-click="updateUserRoles('client')">Register as a Client</a> -->
+             	<div class="row">
+	             	
+				</div>
+				<div class="row">
+				<!-- <div class="col-xs-8 col-md-4" style="margin-top:20px">
+				</div> -->
+	            <div class="col-xs-8 col-md-5" style="margin-top:20px">
+					<form name="userForm" data-ng-submit="updateUserRoles(chooseMembership)" class="signin" autocomplete="off" data-toggle="validator" >
+						<fieldset>
+							<div class="form-group">
+								<label class="radio-inline"><input data-ng-model="chooseMembership.membership" value="freelancer" type="radio" name="membership" required>Register as a Freelancer</label>
+								<label class="radio-inline"><input data-ng-model="chooseMembership.membership" value="client" type="radio" name="membership" required>Register as a Client</label>
+							</div>
+							<div class="form-group">
+								<label for="username">Username*</label>
+								<input type="text" id="username" name="username" class="form-control" data-ng-model="chooseMembership.username" placeholder="username" required >
+							</div>
+							<div data-ng-show="chooseMembership.membership === 'freelancer'">
+								<div class="form-group">
+									<label for="country">Country</label>
+									<select data-ng-init="credentials.country='Qatar'; chooseMembership.country='Qatar'" id="country" name="country" class="form-control" data-ng-model="chooseMembership.country"><!-- data-ng-model="credentials.Country" -->
+										<option data-ng-selected="country.name == 'Qatar'" data-ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
+									</select>
+								</div>
+								<div data-ng-show="chooseMembership.country == 'Qatar'">
+									<div class="form-group">
+										<label for="city">City</label>
+										<select data-ng-init="chooseMembership.city='Doha'" id="city" name="city" class="form-control" data-ng-model="chooseMembership.city" ng-change="getLocationsByCityId('');">
+
+											<option data-ng-selected="city.name == credentials.city" data-ng-repeat="city in cities  | orderBy: 'name'" value={{city.name}}>{{city.name}}</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="location">Area</label>
+										<select id="location" name="location" class="form-control" data-ng-model="chooseMembership.location">
+											<!-- <option data-ng-selected="location.name == credentials.location" data-ng-repeat="location in locations  | orderBy: 'name'" value={{location.name}}>{{location.name}}</option> -->
+											<option value="">-- select --</option>
+											<option data-ng-repeat="location in locations  | orderBy: 'name'" value={{location.name}}>{{location.name}}</option>
+										</select>
+									</div>
+								</div>
+								<div data-ng-show="credentials.country != 'Qatar'">
+									<label for="city">City</label>
+									<input type="text" id="city" name="city" class="form-control" data-ng-model="user.city" placeholder="city">
+									<label for="location">Location</label>
+									<input type="text" id="location" name="location" class="form-control" data-ng-model="user.location" placeholder="location">
+								</div>
+							</div>
+						</fieldset>
+						<button type="submit" class="btn btn-large btn-success">Register</button>
+					</form>
+				</div>	
+				</div>
+
+				<!-- <a class="hyperlink btn btn-info btn-lg" data-ng-click="updateUserRoles(chooseMembership)" type="submit">Register</a> -->
+
+         <!--   -->  </center>
+          </div>
+       </div>
+<script type="text/javascript">
+        $(document).ready(function(){
+        	$('[data-toggle="popover"]').popover(); 
+            // $.material.init();
+        });
+    </script>
+</section>

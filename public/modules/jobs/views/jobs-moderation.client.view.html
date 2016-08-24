@@ -1,0 +1,138 @@
+<section class="row" data-ng-controller="JobsController" data-ng-init="loadJobsForModeration(); setState('Job Moderation'); authAdmin();">
+    <div ng-include="'./modules/categories/views/partials/admin-header.client.view.html'"></div>
+    <div class="col-md-10">
+        <div class="page-header">
+            <h1>Jobs Moderation</h1>
+        </div>
+   <tabset justified="true">
+    <tab heading="Moderation">
+        <table class="table table-hover" ng-hide="modejobs.length == 0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>User</th>
+                    <th>Sub Category</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="modejob in modejobs">
+                    <td><a href="#!/jobs/{{modejob._id}}">{{modejob.name}}</a></td>
+                    <td>{{modejob.user.displayName}}</td>
+                    <td>{{modejob.subcategory.name}}</td>
+                    <td>{{modejob.status}}</td>
+                    <td>
+                        <a class="hyperlink" ng-click="openJobForAdminApproval(modejob)">Review</a>
+                        &nbsp;| &nbsp;
+                        <a href="#!/jobs/{{modejob._id}}/edit"> Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="modejobs.length == 0">
+            <p class="alert alert-info">No Jobs left for Review.</p>
+        </div>
+    </tab>
+    <tab heading="Rejected">
+          <table class="table table-hover" ng-hide="rejectedJobs.length == 0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>User</th>
+                    <th>Sub Category</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="rejectedJob in rejectedJobs">
+                    <td><a href="#!/jobs/{{rejectedJob._id}}">{{rejectedJob.name}}</a></td>
+                    <td>{{rejectedJob.user.displayName}}</td>
+                    <td>{{rejectedJob.subcategory.name}}</td>
+                    <td>{{rejectedJob.status}}</td>
+                    <td><a class="hyperlink" ng-click="openJobForAdminApproval(rejectedJob)">Review</a>
+                        &nbsp;| &nbsp;
+                        <a href="#!/jobs/{{rejectedJob._id}}/edit"> Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="rejectedJobs.length == 0">
+            <p class="alert alert-info">No Rejected Jobs</p>
+        </div>
+    </tab>
+    <tab heading="Live">
+        <table class="table table-hover" ng-hide="livejobs.length == 0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>User</th>
+                    <th>Sub Category</th>
+                    <th>Status</th>
+                    <th>Expiration</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="livejob in livejobs">
+                    <td><a href="#!/jobs/{{livejob._id}}">{{livejob.name}}</a></td>
+                    <td>{{livejob.user.displayName}}</td>
+                    <td>{{livejob.subcategory.name}}</td>
+                    <td>{{livejob.status}}</td>
+                    <td>{{livejob.created  | date : 'MMM d-yyyy HH:mm'}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="livejobs.length == 0">
+            <p class="alert alert-info">No Live Jobs</p>
+        </div>
+    </tab>
+    <tab heading="Closed">
+        <table class="table table-hover" ng-hide="closedjobs.length == 0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>User</th>
+                    <th>Sub Category</th>
+                    <th>Status</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="closedjob in closedjobs">
+                    <td>{{closedjob.name}}</td>
+                    <td>{{closedjob.user.displayName}}</td>
+                    <td>{{closedjob.subcategory.name}}</td>
+                    <td>{{closedjob.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="closedjob.length == 0">
+            <p class="alert alert-info">No Closed Jobs</p>
+        </div>
+    </tab>
+    <tab heading="Rated">
+         <table class="table table-hover" ng-hide="ratedJobs.length == 0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>User</th>
+                    <th>Sub Category</th>
+                    <th>Status</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ratedJob in ratedJobs">
+                    <td><a href="#!/jobs/{{ratedJob._id}}">{{ratedJob.name}}</a></td>
+                    <td>{{ratedJob.user.displayName}}</td>
+                    <td>{{ratedJob.subcategory.name}}</td>
+                    <td>{{ratedJob.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="ratedJobs.length == 0">
+            <p class="alert alert-info">No Rated Jobs</p>
+        </div>
+    </tab>
+  </tabset>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<section class="row well" data-ng-controller="SettingsController" data-ng-init="initUserProfile();">
+    <div ng-include="'./modules/users/views/partials/profile-header.client.view.html'"></div>
+    <div class="col-md-10">
+        <div ng-include="'./modules/users/views/partials/profile-header-user-intro-client-view.html'"></div>
+        <div data-ng-hide="isVisitor">
+            <h3>Edit Profile</h3>
+            <p>Add Files to your portfolio.</p>
+            <div>
+                <form ng-submit="uploadFile()" class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type='file' class="form-control form-control-small" ng-model='file' base-sixty-four-input>
+                        <button type="submit" class="btn btn-primary">add</button>
+                    </div>
+                    <div class="form-group">
+                        <div data-ng-show="error" class="text-center text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <h3>Portfolio of work</h3>
+                <div ng-repeat="file in user.files" class="col-md-4">
+                   <div style="margin-top:10%;">
+                        <center>
+                            <img data-ng-show="file.indexOf('.document')>-1" class="img-thumbnail" src="uploads/icons/word.png" style="height:150px"/>
+                            <img data-ng-show="file.indexOf('.pdf')>-1" class="img-thumbnail" src="uploads/icons/pdf.png" style="height:150px"/>
+                            <img data-ng-show="file.indexOf('.sheet')>-1" class="img-thumbnail" src="uploads/icons/xlsx.png" style="height:150px"/>
+                            <img data-ng-show="file.indexOf('.pptx')>-1" class="img-thumbnail" src="uploads/icons/pptx.png" style="height:150px"/>
+                            <img 
+                            data-ng-show="file.indexOf('.pptx')<0 && file.indexOf('.sheet')<0 && file.indexOf('.pdf')<0 && file.indexOf('.document')<0" class="img-thumbnail" src="uploads/{{file}}" style="height:150px"/>
+                        </center>
+                        <center>
+                            <a data-ng-hide="isVisitor" class="hyperlink" data-ng-click="deleteFile(file)">Remove</a>
+                        </center>
+                   </div>
+                </div>
+                <div data-ng-hide="user.files">
+                   <td>No Portfolio</td>
+                    
+                </div>
+            </div>
+        </div>
+    <div ng-show="isloading" style="background-color:black; opacity:0.2; z-index:0; width:100%; height:100%; display:block; position:absolute; top:0; left:0;">
+        <image src="/assets/loader.gif" style="margin-left:50%; margin-top:25%; top:-24px; left:-24px;" />
+    </div>
+</section>

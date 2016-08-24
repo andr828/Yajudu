@@ -1,0 +1,35 @@
+<section class="row" data-ng-controller="SettingsController" data-ng-init="loadAllUsersForModeration(); setState('Users Moderation'); authAdmin();">
+    <div ng-include="'./modules/categories/views/partials/admin-header.client.view.html'"></div>
+    <div class="col-md-10">
+        <div class="page-header">
+            <h1>Users Moderation</h1>
+        </div>
+  <table class="table table-hover" ng-hide="modejobs.length == 0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Display Name</th>
+                    <th>Active</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in userList">
+                    <td><a href="#!/profile/{{user._id}}">{{user.firstName}} {{user.lastName}}</a></td>
+                    <td>{{user.displayName}}</td>
+                    <td>
+                        <span data-ng-show="user.isActive">Yes</span>
+                        <span data-ng-show="!user.isActive">No</span>
+                    </td>
+                     <td class="text-capitalize">
+                        {{user.roles[0]}}
+                    </td>
+                    <td>
+                        <a class="hyperlink" ng-click="openEditUserForAdminApproval(user)"> Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+  </div>
+</section>

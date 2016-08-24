@@ -1,0 +1,99 @@
+<section data-ng-controller="JobsController" data-ng-init="loadApprovedJobs('');initMenu();">
+    <div ng-include="'./modules/jobs/views/partials/jobs-header.client.view.html'"></div>
+    <div class="col-xs-8 talent-page borderpx">
+        <div>
+            <h1>Find JOBS<span class="result pull-right capitalizet">
+                <span style="cursor:pointer" ng-click="ToggleSearch();">
+                    <span ng-if="sortBy=='Asc'">&#8711;</span>
+                    <span ng-if="sortBy=='Desc'">&#8710;</span>
+                    posted on<span>
+                </h1>
+        </div>
+        <div class="bottomborder-light"> </div>
+        <!-- <ol class="breadcrumb" data-ng-show="bcCategory && bcCategory !== ''">
+            <li><a href="#!/jobs/by-category-id/{{selectedCategory}}">{{bcCategory}}</a></li>
+            <li><a href="#!/jobs/by-subcategory-id/{{selectedSubcategory}}">{{bcSubcategory}}</a></li>
+        </ol>
+        <ol class="breadcrumb" data-ng-show="bcCity && bcCity !== ''">
+            <li>Qatar</li>
+            <li>{{bcCity}}</li>
+            <li>{{bcLocation}}</li>
+        </ol> -->
+        <div class="post-container" data-ng-repeat="job in jobs" data-ng-hide="!authentication.user && !job.isSearchable">
+            <!-- pic-btn pull-left col-xs-2 -->
+            <div class="content col-xs-12">
+                <div class="heading-sec fullwidth">
+                    <h2><a data-ng-href="#!/jobs/{{job._id}}" class="text-capitalize">{{job.name}}</a></h2>
+                    <p><a href="#"><span data-ng-bind="job.category.name"></span></a> / <a href="#"><span data-ng-bind="job.subcategory.name"></span></a><span class="postedby"> Posted by: <a href="#"><span data-ng-bind="job.user.displayName"></span></a>
+                        </span>
+                    </p>
+                </div>
+                <p data-ng-bind="job.description | limitTo: 150"></p>
+                <div class="col-xs-8 padding0 margin0 pull-left">
+                    <div class="pic-btn pull-left col-xs-4 margin0 padding0"> <a href="#" class="btn btn-success" ng-click="applyJob(job);" data-ng-hide="job.isAwarded">Apply</a>
+                    </div>
+                </div>
+                <div class="col-xs-4 pull-right">
+                    <p class="font12">
+                        Posted on: {{job.created | date : 'd-MMM-yyyy'}}
+                        <br/>Valid Until: {{job.ValidTill | date : 'd-MMM-yyyy'}}
+                    </p>
+                </div>
+                <!-- content col-xs-6 -->
+            </div>
+            <div class="clear"></div>
+            <div class="bottomborder-light "></div>
+        </div>
+        <div>
+            <!-- <p>Browse through freelance jobs and tasks posted.</p>
+            <center>
+                <form class="form-inline" data-ng-submit="search()">
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputAmount">Search Jobs</label>
+                        <div class="input-group">
+                            <input type="text" data-ng-model="query" placeholder="search jobs" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-raised">Search</button>
+                </form>
+            </center> -->
+            <center>
+                <div paging page="page" page-size="pageSize" total="totalJobs" paging-action="filterJobs(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, pageSize, page)">
+                </div>
+            </center>
+        </div>
+    </div>
+    <div ng-include="'./modules/core/views/partials/advertisement-panel.client.view.html'"></div>
+    <div ng-show="isloading" style="background-color:black; opacity:0.2; z-index:0; width:100%; height:100%; display:block; position:absolute; top:0; left:0;">
+        <image src="/assets/loader.gif" style="margin-left:50%; margin-top:25%; top:-24px; left:-24px;" />
+    </div>
+    <style type="text/css">
+    .job-card {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+    }
+    
+    .job-card a {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .job-card .profile a {
+        font-size: : 12px;
+        font-weight: normal;
+    }
+    
+    .job-card .job-type {
+        font-weight: bold;
+    }
+    
+    .job-card p {
+        font-size: 12px;
+    }
+    
+    .job-card .client {
+        padding: 10px 0px;
+    }
+    </style>
+</section>

@@ -1,0 +1,118 @@
+/**********************************************/
+/******************DESKTOP*********************/
+/**********************************************/
+@media screen and (max-width: 1200px) {
+	
+	 
+.sidebar-button{
+	width: 140px
+	
+}
+
+	
+	.navbar-nav li:first-child {
+    padding-left: 0;
+    padding-right: 0;
+    width: 252px;
+}
+
+.navbar-nav li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.left-side {
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+.rightside {
+    padding-left: 10px;
+    padding-right: 0;
+}
+
+}
+
+ @media (max-width: 991px) {
+	 .navbar-nav li:first-child {
+   
+    width: 272px;
+}
+ 
+}
+ @media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 975px) {
+}
+@media screen and (max-width: 920px) {
+}
+@media screen and (max-width: 875px) {
+}
+@media screen and (max-width: 840px) {
+
+}
+/**********************************************/
+/******************TABLETS*********************/
+/**********************************************/
+
+@media screen and (max-width: 800px) {
+}
+@media screen and (max-width: 767px) {
+	
+.navbar-collapse.collapse {
+  display: none!important;
+}
+
+.nav-collapse, .nav-collapse.collapse {
+    overflow: visible;
+}   
+.navbar .btn-navbar {
+    display: none;
+}  
+}
+@media screen and (max-width: 756px) {
+
+}
+@media screen and (max-width: 720px) {
+}
+@media screen and (max-width: 700px) {
+}
+@media screen and (max-width: 667px) {
+}
+@media screen and (max-width: 640px) {
+
+}
+@media screen and (max-width: 600px) {
+}
+@media screen and (max-width: 572px) {
+}
+@media screen and (max-width: 550px) {
+}
+/**********************************************/
+/******************MOBILES*********************/
+/**********************************************/
+@media screen and (max-width: 500px) {
+}
+@media screen and (max-width: 480px) {
+
+}
+ @media screen and (max-width: 460px) {
+
+}
+@media screen and (max-width: 420px) {
+}
+@media screen and (max-width: 400px) {
+}
+@media screen and (max-width: 375px) {
+}
+@media screen and (max-width: 362px) {
+
+}
+@media screen and (max-width: 340px) {
+}
+@media screen and (max-width: 320px) {
+}
+@media screen and (max-width: 280px) {
+}
+@media screen and (max-width: 240px) {
+}

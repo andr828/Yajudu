@@ -1,0 +1,65 @@
+<section class="row" data-ng-controller="SettingsController" ng-init="initUserProfile();">
+
+	<div ng-include="'./modules/users/views/partials/profile-header.client.view.html'"></div>
+  <div class="col-md-6">
+	<div ng-include="'./modules/users/views/partials/profile-header-user-intro-client-view.html'"></div>
+       <div class="col-md-4">
+          <h3>Yajidu History</h3>
+       </div>
+       <div class="col-md-8">
+        
+        <div class="row alert alert-info" role="alert">
+            <div class="col-sm-3">
+                {{history.length ? history.length : 0}} Jobs Completed
+            </div>
+            <div class="col-sm-5">
+                <star-rating data-ng-model="user.averageRating" max="10" readonly="true"></star-rating><br> 
+            </div>
+            <div class="col-sm-3">
+                {{totalClients ? totalClients : 0 }} Clients
+                <br>
+                {{repeatRate ? repeatRate : 0 | number : 0}}% Repeat
+            </div>
+        </div>
+
+        <div ng-repeat="feedback in history">
+          <div class="row">
+              <h3><a data-ng-href="#!/jobs/{{feedback.job._id}}" > {{feedback.job.name}}</a></h3>
+              <star-rating data-ng-model="feedback.rating" max="10" readonly="true"></star-rating><br>
+          </div>
+          <div class="row">
+          <div class="col-md-2"></div>  
+            <div class="col-md-10">{{feedback.job.acceptedProposal.acceptanceDate 
+                | date:'dd-MMM-yyyy'}} 
+                | <span data-ng-hide="feedback.job.chargingType == 'Hourly'">
+                    {{feedback.job.visibilityDuration}} days
+                  </span>
+                  <span data-ng-show="feedback.job.chargingType == 'Hourly'">
+                    {{feedback.job.duration}}
+                  </span>
+                  | {{feedback.job.category.name}} | {{feedback.job.subcategory.name}}
+            </div>
+          </div>
+         <!-- <div ng-repeat="feedback in feedbacks">
+               <h3><a data-ng-href="#!/jobs/{{feedback.job._id}}" > {{feedback.job.name}}</a></h3>
+               <star-rating data-ng-model="feedback.rating" max="10" readonly="true"></star-rating><br>
+               <div><b>Proposal acceptance date</b>: {{feedback.job.acceptedProposal.acceptanceDate | date:'dd-MMM-yyyy'}}</div>
+               <div><b>Duration of job</b>: 
+                  <span data-ng-hide="feedback.job.chargingType == 'Hourly'">
+                    {{feedback.job.visibilityDuration}} days
+                  </span>
+                  <span data-ng-show="feedback.job.chargingType == 'Hourly'">
+                    {{feedback.job.duration}}
+                  </span>
+               </div>
+               <div><b>Review</b>: {{feedback.description | limitTo: 300}}</div>
+               <div><b>Category</b>: {{feedback.job.category.name}}</div>
+               <td><b>Subcategory</b>: {{feedback.job.subcategory.name}}</td>
+             </div> -->
+              <div data-ng-hide="history">
+               <div>No Job History <span data-ng-show='querySkill'> For '{{querySkill.name}}'</span></div>
+             </div>
+       </div>
+       </div>
+
+</section>

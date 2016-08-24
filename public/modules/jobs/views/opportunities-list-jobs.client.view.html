@@ -1,0 +1,76 @@
+<section class="row" data-ng-controller="JobsController" data-ng-init="loadJobOpportunities();initMenu();">
+    <!-- <div ng-include="'./modules/jobs/views/partials/jobs-header.client.view.html'"></div> -->
+    <div class="col-sm-10">
+        <div class="page-header">
+            <h1>Job Opportunities</h1>
+        </div>
+        <div >
+            <p>Browse the jobs that have been posted by people in Qatar looking for Talent. Jobs are updated daily so be sure to check back. If you're looking for a Talent.</p>
+            <!-- Search job option commented below -->
+           <!--  <form class="form-inline" data-ng-submit="search()">
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputAmount">Search Jobs</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">Search Jobs</div>
+                        <input type="text" data-ng-model="query" class="form-control">
+                    </div>
+                </div>
+                <a  class="btn btn-primary hyperlink" data-ng-href="#!/searchJob/{{query}}">Search</a>
+            </form> -->
+            <div data-ng-repeat="job in jobs" class="job-card" style="margin-top:20px;">
+                <a data-ng-href="#!/jobs/{{job._id}}" class="text-capitalize">{{job.name}}</a>
+                <div class="stats">
+                    <span data-ng-bind="job.chargingType" class="job-type"></span> 
+                    <span ng-show="job.chargingType=='Hourly'" data-ng-bind="job.hourlyRate"></span>
+                    <span ng-hide="job.chargingType=='Hourly'" data-ng-bind="job.budget"></span>
+                    &nbsp;|&nbsp;<small>Posted: </small>
+                    <small data-ng-bind="postedSince(job.created)"></small>
+                    &nbsp;|&nbsp;<small>Ends: </small>
+                    <small data-ng-bind="validTill(job.ValidTill)"></small>
+                    &nbsp;|&nbsp;
+                    <small>{{job.proposals.length}} Proposals</small>
+                </div>
+                <p class="text-capitalize" data-ng-bind="job.description">
+                </p>
+                <div class="desc">
+                    <span style="color:grey;" >Category:</span>&nbsp;
+                    <span data-ng-bind="job.subcategory.name"></span>
+
+                    <span style="color:grey; margin-left:20px">Skills:</span>
+                    <span ng-repeat="skill in job.skills">{{skill.name}}{{$last ? '' : ', '}}</span>
+                </div>
+                <div class="client">
+                    <span>Posted by:</span>&nbsp;<a ng-href="#!/client-profile/{{job.user._id}}" style="font-weight:normal; font-size: 14px;">{{job.user.displayName}}</a>
+                </div>
+            </div>
+              <div data-ng-hide="jobs">
+               <div>No Jobs <span data-ng-show='querySkill'> For '{{querySkill.name}}'</span></div>
+             </div>
+        </div>
+    </div>
+    <style type="text/css">
+    .job-card {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+    }
+    
+    .job-card a {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .job-card .profile a{
+        font-size: :12px;
+        font-weight: normal;
+    }
+    .job-card .job-type{
+        font-weight: bold;
+    }
+    .job-card p{
+        font-size: 12px;
+    }
+    .job-card .client{
+        padding: 10px 0px;
+    }
+    </style>
+</section>

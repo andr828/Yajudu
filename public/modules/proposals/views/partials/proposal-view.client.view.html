@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <h3 class="modal-title">Review Proposal!</h3>
+</div>
+<div class="modal-body">
+    <div class="proposal">
+        <div class="row">
+            <div class="col-sm-2" style="text-align:center">
+                <a href="#" class="box">
+                    <img src="/assets/no-avatar.png" alt="..." width="100" style="background-color:white; border:1px solid #eee; padding:2px; border-radius:5px;">
+                </a>
+        </div>
+            <div class="col-sm-10">
+                <a class="profilelink" data-ng-href="#!/profile/{{proposal.user._id}}" data-ng-click="cancel()">{{proposal.user.displayName}}</a>
+                <span>{{proposal.user.cityStateCountry}}</span>
+                <h4>Job Approach</h4>
+                <p>{{proposal.jobApproach}}</p>
+                <h4>Relative Experience</h4>
+                <p>{{proposal.experience}}</p>
+                <h4>Proposed Budget</h4>
+                <p>Propsed Cost: QAR {{proposal.myEarnings}}<span ng-show="proposal.job.chargingType=='Hourly'">/Hour</span></p>
+                <p ng-show="proposal.job.chargingType=='Hourly'">
+                    Hours: {{proposal.hours?proposal.hours : 0}}/week
+                </p>
+                <p>Duration and timings : {{proposal.estimatedDuration}}</p>
+                <hr >
+                <!-- <p>Skills : 
+                    <a ng-repeat="skill in proposal.user.skills" href="#" target="_blank">
+                        {{skill.name}} &nbsp;
+                    </a>
+                </p> -->
+                <p>Jobs completed: {{proposal.user.history.length}}</p>
+            </div>
+        </div>
+        <div class="row proposal-footer" >
+            <div class="col-sm-8">
+                <span style="margin-top:3px;">Bid ID: {{proposal.bidId}}</span>
+                &nbsp;|&nbsp;
+                <span>Submitted: {{proposal.created | date : 'MMM d-yyyy HH:mm'}}</span>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+<div class="modal-footer">
+    
+    <button class="btn btn-primary" ng-click="Approve(proposal._id)">Approve</button>
+    <button class="btn btn-danger" ng-click="Reject(proposal._id)">Reject</button>
+    <button class="btn btn-primary" ng-click="openProposalForAdminEdit(proposal)"> Edit </button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
+</div>
+
+<style type="text/css">
+    .proposal { 
+        
+    }
+    .proposal .profilelink{
+        font-size: 20px;
+    }
+    .proposal-footer{
+        padding: 3px;
+        background: #eee;
+    }
+</style>

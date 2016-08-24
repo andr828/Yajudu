@@ -1,0 +1,85 @@
+<section class="row" data-ng-controller="SettingsController" style="margin-top:10px;" data-ng-init="auth(); initUserProfile(); initSpecialities()">
+    <div ng-include="'./modules/users/views/partials/profile-public-view-header.view.html'"></div>
+    <div class="col-xs-8 talent-page borderpx">
+        <div class="bottomborder-light"> </div>
+        <div class="heading-sec fullwidth">
+            <h2>{{user.displayName}} <span><img src="assets/images/edit-icon.png" /></span>
+          	<span class="pull-right"> 
+          		<i class="fa fa-star" aria-hidden="true"></i> 
+          		<i class="fa fa-star" aria-hidden="true"></i> 
+          		<i class="fa fa-star" aria-hidden="true"></i> 
+          		<i class="fa fa-star" aria-hidden="true"></i> 
+          		<i class="fa fa-star" aria-hidden="true"></i> 
+          	</span> 
+          </h2>
+        </div>
+        <div class="fullwidth">
+            <p>{{user.cityStateCountry}} <span class="pull-right"> </span> </p>
+        </div>
+        <p class="col-xs-10 paddingleft0 paddingb30">{{user.shortProfile}}</p>
+        <div class="col-xs-2 paddingleft0"><img src="assets/images/edit-icon.png" /></div>
+        <div class="fullwidth pull-left">
+            <p><span class="colorBlue">Member Since:</span> {{user.created | date : 'MMM d,yyyy'}} <span class="colorBlue">Completed Jobs:</span> {{user.history.length}} <span class="colorBlue">Clients:</span> {{user.history.length}} <span class="colorBlue">Repeated:</span> 20%</p>
+        </div>
+        <div class="clear"></div>
+        <div class="bottomborder-light "></div>
+        <div class="col-xs-12">
+            <p class="pull-left marginT10 colorBlue"><span class="marginr30">Skills:</span><span><img src="assets/images/edit-icon.png" /></span></p>
+        </div>
+        <div class="col-xs-11">
+            <div class="tags">
+                <ul>
+                    <li data-ng-repeat="subcategory in subcategories">{{subcategory.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="bottomborder-light "></div>
+        <div class="fullwidth pull-left">
+            <p class="colorBlue marginr30 pull-left paddingb30">Portfolio</p><span class="pull-left"><a href="#popup1"><img src="assets/images/plus.png" /></a></span>
+        </div>
+        <div class="fullwidth pull-left">
+            <ul class="portfoliolist padding0">
+                <li><span class="marginr30 "><img src="assets/images/img.png" /></span> sample text sample text <span class="pull-right"><img src="assets/images/minus.png" /></span></li>
+                <li><span class="marginr30"><img src="assets/images/img.png" /></span> sample text sample text <span class="pull-right"><img src="assets/images/minus.png" /></span></li>
+                <li><span class="marginr30 "><img src="assets/images/attc.png" /></span> sample text sample text <span class="pull-right"><img src="assets/images/minus.png" /></span></li>
+                <li><span class="marginr30"><img src="assets/images/pdf.png" /></span> sample text sample text <span class="pull-right"><img src="assets/images/minus.png" /></span></li>
+                <li><span class="marginr30 "><img src="assets/images/file.png" /></span> sample text sample text <span class="pull-right"><img src="assets/images/minus.png" /></span></li>
+                <li><span class="marginr30"><img src="assets/images/pdf.png" /></span> sample text sample text <span class="pull-right"><img src="assets/images/minus.png" /></span></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div class="bottomborder-light "></div>
+        <div class="fullwidth pull-left" data-ng-show="history.length && user.addDisplayOptions !== 'display_none'">
+            <p class="colorBlue marginr30 pull-left paddingb30">Client Reviews</p>
+        </div>
+        <div class="fullwidth pull-left" data-ng-show="history.length && user.addDisplayOptions !== 'display_none'">
+            <ul class="portfoliolist padding0">
+                <li data-ng-repeat="feedback in history">
+                    {{feedback.description}}
+                    <br />
+                    <span class="Review marginT10">
+      					<span class=" marginr30 pull-left">
+      						{{feedback.byUser.displayName}} 
+      					</span>
+                    <span class=" marginr30 pull-left">
+				      <i class="fa fa-star" aria-hidden="true" ng-if="feedback.rating >=1"></i>
+				      <i class="fa fa-star" aria-hidden="true" ng-if="feedback.rating >=2"></i>
+				      <i class="fa fa-star" aria-hidden="true" ng-if="feedback.rating >=3"></i>
+				      <i class="fa fa-star" aria-hidden="true" ng-if="feedback.rating >=4"></i>
+				      <i class="fa fa-star" aria-hidden="true" ng-if="feedback.rating >=5"></i>
+      
+      				</span>
+                    </span>
+                    <br/>
+                    <span class="Review marginT10">
+      					<span class=" marginr30 pull-left">
+                    		<a href="#" >{{feedback.job.name}}</a>
+                		</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div ng-include="'./modules/core/views/partials/advertisement-panel.client.view.html'"></div>
+</section>

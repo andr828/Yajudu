@@ -1,0 +1,104 @@
+<section class="row" data-ng-controller="HireController" ng-init = "initList(); loadInfo();">
+	<div ng-include="'./modules/hire/views/partials/hire-header.client.view.html'"></div>
+    <div class="col-xs-8 talent-page borderpx">
+    <!-- <div class="col-sm-10"> -->
+    <div>
+      <h1>Find Talent <span class="result pull-right capitalizet">/all results/</span></h1>
+    </div>
+        <div class="bottomborder-light"> </div>
+        <ol class="breadcrumb" data-ng-show="bcCategory && bcCategory !== ''">
+            <li>{{bcCategory}}</li>
+            <li><a href="#!/talent/by-subcategory-id/{{selectedSubcategory}}">{{bcSubcategory}}</a></li>
+        </ol>
+        <ol class="breadcrumb" data-ng-show="bcCity && bcCity !== ''">
+            <li>Qatar</li>
+            <li>{{bcCity}}</li>
+            <li>{{bcLocation}}</li>
+        </ol>
+        <div >
+    <div class="post-container" ng-repeat="user in userList | orderBy:'averageRating'">
+      <div class="pic-btn pull-left col-xs-2 margin0 padding0"> 
+        <img src="{{user.profilePictureURL}}" style="width:100px" onError="this.onerror=null;this.src='assets/images/noavatar.jpg';"  />
+
+                            <a data-ng-controller="SettingsController"  data-ng-show="authentication.user && authentication.user.roles[0]==='client'" ng-click="openInviteUser()" href="#popup1" class="btn btn-success">Contact</a>
+       
+      </div>
+     
+      <!-- pic-btn pull-left col-xs-2 -->
+      
+      <div class="col-xs-10">
+        <div class="heading-sec fullwidth" >
+          <h2>
+            <a data-ng-href="#!/profile/{{user._id}}">
+                <span data-ng-if="user.addDisplayOptions === 'hide_name'">{{user.username}}</span>
+                <span data-ng-if="user.addDisplayOptions !== 'hide_name'">{{user.displayName}}</span>
+            </a>
+            
+            <span class="pull-right">
+                <i class="fa fa-star" aria-hidden="true" ng-if="user.averageRating > 0"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-if="user.averageRating > 1"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-if="user.averageRating > 2"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-if="user.averageRating > 3"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-if="user.averageRating > 4"></i>
+                <small ng-if="user.averageRating == 0 ">No Ratings</small>
+            </span>
+            </h2>
+        </div>
+        <div class="fullwidth">
+          <p>{{user.cityStateCountry}} <span class="pull-right">{{user.history.length}} Jobs </span> </p>
+        </div>
+        <p> {{user.shortProfile | limitTo:200}} </p>
+        <!-- <a class="hyperlink" >{{subcategory.name}}<span data-ng-hide="$last">, </span>
+                            </a>-->
+        <div class="col-xs-1">
+          <p class="pull-left marginT10 colorBlue">Skills:</p>
+        </div>
+        <div class="col-xs-11">
+            <p class="pull-left marginT10" data-ng-if="!user.subcategories || user.subcategories.length < 1"> N/A </p>
+        
+          <div class="tags" data-ng-if="user.subcategories && user.subcategories.length > 0">
+            <ul >
+              <li ng-repeat = "subcategory in user.subcategories"  data-ng-click="searchBySubcategory(subcategory._id); setState(subcategory.name);">{{subcategory.name}}</li>
+            </ul>
+          </div>
+        </div>
+        <!-- content col-xs-10 --> 
+        
+      </div>
+      <div class="clear"></div>
+      <div class="bottomborder-light "></div>
+    </div>
+            
+            <!-- <small>Browse through our list of top talent and connect.</small>
+            <br/>
+            <br/>
+            <center>
+                <form class="form-inline" data-ng-submit="search()">
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputAmount">Search Freelancer</label>
+                        <div class="input-group">
+                            <input type="text" data-ng-model="query" placeholder="search talent" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-raised">Search</button>
+                </form>
+            </center>  -->
+           	
+        <div data-ng-hide="userList">
+               <div>No Contractors Found <span data-ng-show='querySkill'> For '{{querySkill.name}}'</span></div>
+        </div>
+        <center>
+            <div paging
+                    page="page" 
+                    page-size="pageSize" 
+                    total="totalUsers"
+                    paging-action="filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, page);">
+            </div>
+        </center>
+    </div>
+    
+    </div>
+    <div ng-show="isloading" style="background-color:black; opacity:0.2; z-index:0; width:100%; height:100%; display:block; position:absolute; top:0; left:0;">
+        <image src="/assets/loader.gif" style="margin-left:50%; margin-top:25%; top:-24px; left:-24px;" />
+    </div>
+</section>

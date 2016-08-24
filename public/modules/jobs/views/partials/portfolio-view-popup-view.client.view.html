@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{user.displayName}} Proposal!</h3>
+</div>
+<div class="modal-body col-md-12" style="max-height:400px; overflow:scroll" data-ng-show="user.files.length">
+	<!-- <carousel interval="myInterval" no-wrap="noWrapSlides" >
+      <slide ng-repeat="file in user.files" active="slide.active">
+        <img ng-src="/uploads/{{file}}" style="margin:auto; height:290px" >
+      </slide>
+    </carousel> -->
+    <div ng-repeat="file in user.files" class="col-md-4">
+	   <div style="margin-top:10%;">
+	        <center>
+	            <img class="img-thumbnail" src="uploads/{{file}}" style="height:150px"/>
+	        </center>
+	        <center>
+	            <a data-ng-hide="isVisitor" class="hyperlink" data-ng-click="deleteFile(file)">Remove</a>
+	        </center>
+	   </div>
+	</div>
+</div>
+<div data-ng-show="!user.files.length">
+            <p class="alert alert-info">No Portfolio Attached</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="close()">Close</button>
+</div>
+

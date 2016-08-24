@@ -1,0 +1,160 @@
+<section  data-ng-controller="JobsController" ng-init="findOne(); auth();">
+
+    <div class="page-header">
+        <h1>Preview and Post</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Job Title</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.name}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Job Description</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.description}}</span>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Files</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.name}}</span>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Job Type</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.chargingType}}</span>
+        </div>
+    </div>
+    <div class="row" ng-hide="job.chargingType=='Hourly'">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Approximate Budget</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.budget}}</span>
+        </div>
+    </div>
+    <div class="row" ng-hide="job.chargingType !='Hourly'">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Duration</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.duration}}</span>
+        </div>
+    </div>
+    <div class="row" ng-hide="job.chargingType !='Hourly'">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Hours Per Week</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.hoursRequired}}</span>
+        </div>
+    </div>
+    <div class="row" ng-hide="job.chargingType !='Hourly'">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Hours Budget</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.hourlyRate}}</span>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Work View</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.name}}</span>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Category</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.subcategory.category.name}}, {{job.subcategory.name}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Posting Period</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.visibilityDuration}} days</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Job Start Date</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{job.jobStartOn}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Job Posting Visibility</label>
+        </div>
+        <div class="col-sm-9">
+            <span ng-show="job.isPublicPosting">Public—Visible to the Yajidu community and search engines.</span>
+            <span ng-hide="job.isPublicPosting">Private—Do not show on Yajidu jobs list. Only candidates I invite can respond.</span>
+        </div>
+    </div>
+    <div class="row" ng-show="job.isSearchable">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Search Engine Visibility</label>
+        </div>
+        <div class="col-sm-9">
+            <span>Get more proposals. Allow search engines like Google to view this post.</span>
+        </div>
+    </div>
+    <div class="row" ng-hide="success || job.status != 'Draft'">
+        <div class="col-sm-offset-3 col-sm-9">
+            <input data-ng-hide="actionHeading==='Renew'" type="button" class="btn btn-primary" value="Post Job" ng-click="updateJobStatus('Pending')" />
+            <input data-ng-show="actionHeading==='Renew'" type="button" class="btn btn-primary" value="Post renewed Job" ng-click="updateJobStatus('Pending')" />
+            <a data-ng-hide="actionHeading==='Renew'" href="/#!/jobs/{{job._id}}/edit" class="btn btn-danger ">Edit Job</a>
+            <a data-ng-show="actionHeading==='Renew'" href="/#!/jobs/{{job._id}}/renew/edit" class="btn btn-danger ">Edit Post</a>
+        </div>
+    </div>
+    <div class="row" ng-show="isAdmin">
+        <div class="col-sm-offset-3 col-sm-9">
+            <input type="button" class="btn btn-primary" value="Accept" ng-click="updateJobStatus('Approved')" />
+            &nbsp;&nbsp;
+            <input type="button" class="btn btn-danger" value="Reject" ng-click="updateJobStatus('Reject')" />
+        </div>
+    </div>
+    <!--Action Messages-->
+   <!--  <div ng-hide="isAdmin">
+        <div class="row" ng-show="success || job.status != 'Draft' ">
+            <div class="col-sm-offset-3 col-sm-9">
+                <p class="bg-success">Job already posted!</p>
+            </div>
+        </div>
+    </div> -->
+        <div class="row alert alert-success" ng-show="success.length > 0">
+            <div class="col-sm-offset-3 col-sm-9">
+                <!-- <p data-ng-hide="actionHeading==='Renew'">Thank you for posting your job. The job is in a queue for moderation and will be reviewed soon.<a href="/#!/contractors">
+                    <strong> <u>Search Talent</u> </strong> </a>
+                </p> -->
+                <p data-ng-hide="actionHeading==='Renew'">Thank you for posting your job, we will review and post shortly.
+                </p>
+
+                <p data-ng-show="actionHeading==='Renew'">Thank you, changes will be reflected shortly.<a href="/#!/contractors">
+                    <strong> <u>Search Talent</u> </strong> </a>
+                </p>
+            </div>
+        </div>
+        <div class="row alert alert-danger" ng-show="error.length > 0">
+            <div class="col-sm-offset-3 col-sm-9">
+                <p class="">{{error}}</p>
+            </div>
+        </div>
+</section>

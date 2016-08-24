@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h3 class="modal-title"> Job History</h3>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="container">
+            <img style="width:75px;height:75px;border-radius:50%" src="../../../uploads/{{proposal.user.profilePicture}}"  alt="Cinque Terre" > 
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <strong>{{proposal.user.displayName}}</strong> <br /> <br /> <span class="glyphicon glyphicon-flag"></span>{{proposal.user.cityStateCountry}}  |  Rate:${{proposal.myEarnings}}/hour |  
+        {{proposal.user.history.length ? proposal.user.history.length : 0  }} Jobs  |  ${{proposal.user.totalEarnings ? proposal.user.totalEarnings : 0}} Earnings  | 
+        <star-rating data-ng-model="proposal.user.averageRating" max="5" readonly="true"></star-rating> |  
+        <span class="glyphicon glyphicon-play"></span> Portfolio
+    </div>
+</div>
+
+<div class="modal-body" style="height:300px;" data-ng-show="history.length">
+	<table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Client</th>
+                    <th>Date Created</th>
+                    <th>Earning</th>
+                    <th>Rating</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="currentJob in history">
+                    <td><a href="#!/jobs/{{currentJob.job._id}}">{{currentJob.job.name}}</a></td>
+                    <td>{{currentJob.byUser.displayName}}</td>
+                    <td>{{currentJob.job.created | date : 'MMM dd, yyyy'}}</td>
+                    <td>${{currentJob.totalPayment}}</td>
+                    <td><star-rating data-ng-model="proposal.user.averageRating" max="5" readonly="true"></star-rating></td>
+                </tr>
+            </tbody>
+	</table>
+</div>
+<div data-ng-show="!history.length">
+            <p class="bg-danger">No Job History Found</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="close()">Close</button>
+</div>

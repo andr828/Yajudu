@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h3 class="modal-title"> Select Avatar</h3>
+</div>
+<div class="modal-body">
+    <div class="row" data-ng-show="selectedAvatar">
+        <h4>Selected Avatar</h4>
+        <img class="img-thumbnail" src="uploads/{{selectedAvatar}}" style="height:150px"/>
+    </div><br><br>
+	<div class="row">
+		<div ng-repeat="avatar in avatars" class="col-md-4">
+                <a class="hyperlink" data-ng-click="selectCurrentAvatar(avatar)"><img class="img-thumbnail" src="uploads/{{avatar}}" style="height:100px"/></a>
+                <!-- <center>
+                    <a data-ng-hide="isVisitor" class="hyperlink" data-ng-click="deleteFile(file)">Remove</a>
+                </center> -->
+        </div> 
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-success" ng-click="select()">Save</button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
+</div>
+<script type="text/javascript">
+        $(document).ready(function(){
+            // $.material.init();
+        });
+</script>
+<style type="text/css">
+	.notbold{
+    	font-weight:normal
+	}	​
+</style>

@@ -1,0 +1,87 @@
+<section class="row" data-ng-controller="JobsController" data-ng-init="initMenu(); loadAllSubcategories();">
+    <!-- <div ng-include="'./modules/jobs/views/partials/jobs-header.client.view.html'"></div> -->
+    <div class="col-sm-10">
+        <div class="page-header">
+            <h1>Browse Jobs</h1>
+        </div>
+        <div >
+            <p>Browse the jobs that have been posted by people in Qatar looking for Talent. Jobs are updated daily so be sure to check back. If you're looking for a Talent.</p>
+            <!--you can post your jobs <a href='#'>here</a> -->
+            <center>
+                <form class="form-inline" data-ng-submit="browseJobsSearch(query)">
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputAmount">Search Jobs</label>
+                        <div class="input-group">
+                            <!-- <div class="input-group-addon">Search Jobs</div> -->
+                            <input type="text" data-ng-model="query" class="form-control">
+                        </div>
+                    </div>
+                    <!-- <a  class="btn btn-primary hyperlink btn-raised" data-ng-href="#!/searchJob/{{query}}">Search</a> -->
+                        <button type="submit" class="btn btn-primary btn-raised">Search</button>
+                    
+                </form>
+            </center>
+            <div style="margin-top:20px;">
+                
+                        <div data-ng-repeat="category in categories | orderBy:'name'" calss="row col-md-12">
+                            <div class="col-md-4">
+                                <a data-ng-href="#!/jobs/by-category-id/{{category._id}}">
+                                    <h4>{{category.name}}</h4>
+                                </a>
+                                <div data-ng-repeat="subcategory in subcategories | orderBy:'name'">
+                                    <div data-ng-if="subcategory.category.name == category.name">
+                                        <a data-ng-href="#!/jobs/by-subcategory-id/{{subcategory._id}}">{{subcategory.name}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- <tab heading="Skills">
+                        <div clas="row col-md-12" style="margin-top: 2%">
+                            <div class="col-md-3">
+                                <a class="hyperlink" data-ng-click="getSkillsByCategoryId()">
+                                    <strong>All Skills</strong>
+                                </a>
+                                <div data-ng-repeat="category in categories">
+                                    <a class="hyperlink" data-ng-click="getSkillsByCategoryId(category._id)">{{category.name}}</a>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                 <div data-ng-repeat="skill in skills" class="col-md-4">
+                                    <a class="hyperlink" data-ng-href="#!/jobs/by-skill-id/{{skill._id}}">{{skill.name}} </a> <small>({{skill.jobsCount}})</small>
+                                </div>
+                            </div>  
+                        </div>
+                    </tab> -->
+
+    </div>
+        </div>
+    </div>
+    <style type="text/css">
+    .nav-tabs.nav-justified {
+    width: 50%;
+    }
+    .job-card {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+    }
+    
+    .job-card a {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .job-card .profile a{
+        font-size: :12px;
+        font-weight: normal;
+    }
+    .job-card .job-type{
+        font-weight: bold;
+    }
+    .job-card p{
+        font-size: 12px;
+    }
+    .job-card .client{
+        padding: 10px 0px;
+    }
+    </style>
+</section>

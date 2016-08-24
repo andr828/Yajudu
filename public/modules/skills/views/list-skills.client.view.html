@@ -1,0 +1,46 @@
+<section class="row well" data-ng-controller="SkillsController" data-ng-init="find(); setState('Skills'); auth();">
+    <div ng-include="'./modules/categories/views/partials/admin-header.client.view.html'"></div>
+    <div class="col-md-10">
+
+    <div class="page-header">
+        <h1>Skills</h1>
+    </div>
+
+    <div class="list-group">
+        <a href="/#!/skills/create" class="btn btn-primary">Create</a>
+        <br />
+        <br />
+        <table class="table table-hover">
+           <thead>
+             <tr>
+               <th>Skill</th>
+               <th>Category</th>
+               <th>Active</th>
+               <th>Action</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr ng-repeat="skill in skills">
+               <td>{{skill.name}}</td>
+               <td>{{skill.category.name}}</td>
+               <td>{{skill.isActive? 'Yes' : 'No'}}</td>
+               <td><a data-ng-href="#!/skills/{{skill._id}}/edit">Edit</a>&nbsp;</td>
+             </tr>
+             
+           </tbody>
+         </table>
+        <!-- <a data-ng-repeat="skill in skills" data-ng-href="#!/skills/{{skill._id}}/edit" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="skill.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="skill.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="skill.name"></h4>
+        </a> -->
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!skills.$resolved || skills.length">
+    	No Skills yet, why don't you <a href="/#!/skills/create">create one</a>?
+    </div>
+    </div>
+</section>

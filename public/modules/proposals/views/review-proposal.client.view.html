@@ -1,0 +1,166 @@
+<section data-ng-controller="ProposalsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Proposal Detail</h1>
+	</div>
+	  <div class="job-desc">
+	<div id="jobDetail">
+            <div class="job-detail" style="margin-left: 2em">
+                <a class="box" href="#"><img alt="..." height="80" src=
+                "/assets/no-avatar.png" style=
+                "background-color:white; border:1px solid #eee; padding:2px; border-radius:5px;"
+                width="80"></a>
+
+                <p style="color:#00468C;">{{proposal.user.displayName}}</p>
+            </div>
+
+            <ul class="jobDetail">
+                <li class=
+                "atomicJobDetail bid-icon-spr spr-budget bid-icon-spr-bg">
+                <span class="smart-info-container" style=
+                "display: inline-block;">{{proposal.user.cityStateCountry}}</span></li>
+
+                <li class=
+                "atomicJobDetail bid-icon-spr spr-fixed_price bid-icon-spr-bg">
+                <span class="smart-info-container" style=
+                "display: inline-block;">{{proposal.user.companyName == '' || proposalObj.user.companyName == undefined ? 'Freelancer' : proposalObj.user.companyName }}</span></li>
+            </ul>
+        </div>
+        </div>
+     <div class="job-desc">    
+	<div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Experience</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{proposal.experience}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Approach</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{proposal.jobApproach}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Earning</label>
+        </div>
+        <div class="col-sm-9">
+            <span>$&nbsp;{{proposal.myEarnings}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="name">Estimated Duration</label>
+        </div>
+        <div class="col-sm-9">
+            <span>{{proposal.estimatedDuration}}&nbsp;Week/s</span>
+        </div>
+    </div>
+	<div class="pull-right" ng-show = "proposalStatusDefined === 'true'">
+        <span>{{proposal.status == 'accepted' ? 'This proposal have been accepted':'This proposal have been rejected'}}</span>
+    </div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="proposal.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="proposal.user.displayName"></span>
+		</em>
+	</small>
+	</div>
+</section>
+    <style type="text/css">
+    .job-desc {
+        padding: 15px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+    }
+    
+    #jobDetail {
+        overflow: hidden;
+        height: 110px;
+        padding-bottom: 15px;
+    }
+    
+    #jobDetail .atomicJobDetail {
+        display: block;
+        width: 220px!important;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    
+    #jobDetail li {
+        padding: 3px 0px 3px 30px;
+        height: 28px;
+    }
+    
+    .job-detail {
+        list-style-type: none;
+        padding: 0px;
+        float: left;
+        width: 255px;
+    }
+    
+    .bid-icon-spr {
+        background: url('/assets/bid_icon_sprite.png') no-repeat top left;
+        display: inline-block;
+        zoom: 1;
+    }
+    
+    .spr-posted_date {
+        background-position: 1px -267px;
+        height: 20px;
+        /*width: 19px;*/
+    }
+    
+    .spr-time_left {
+        background-position: 2px -326px;
+        height: 20px;
+        width: 17px;
+    }
+    
+    .spr-job_location {
+        background-position: 0 -237px;
+        height: 20px;
+        width: 19px;
+    }
+    
+    .spr-start_date {
+        background-position: 0 -297px;
+        height: 19px;
+        width: 20px;
+    }
+    
+    .spr-fixed_price {
+        background-position: 2px -177px;
+        height: 20px;
+        width: 18px;
+    }
+    
+    .spr-duration {
+        background-position: 0 -88px;
+        height: 19px;
+        width: 20px;
+    }
+    
+    #clientInfo {
+        overflow: hidden;
+        height: 110px;
+        padding-bottom: 15px;
+    }
+    
+    #clientInfo .box {
+        float: left;
+        padding: 0px;
+        margin-right: 10px;
+    }
+    
+    .my-proposal {
+        padding: 10px;
+        background-color: #E0E6F3;
+        border-radius: 5px;
+    }
+

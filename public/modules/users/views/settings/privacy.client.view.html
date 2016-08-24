@@ -1,0 +1,43 @@
+<section class="row well" data-ng-controller="SettingsController" >
+
+	<div ng-include="'./modules/users/views/partials/profile-header.client.view.html'"></div>
+	
+       <div class="col-md-6">
+              <h3>Privacy Settings</h3>
+
+           
+       <form ng-submit="SavePrivacy()" class="form-inline" role="form">
+             <h4>Your Freelancer Profile</h4>
+       <p>Manage privacy settings for your freelancer profile on Yajidu. <a href='#!/profile/{{user._id}}'>See how others view my freelancer profiles.</a></p>
+
+          <div class="checkbox">
+            <label>
+                <input type="checkbox" name="showProfile" data-ng-model="showProfile" ng-checked="showProfile" >Do not show my freelancer profile in Yajidu search results.
+            </label>
+          </div>
+           <div class="checkbox">
+              <label>
+                <input type="checkbox" name="enableIndexing" data-ng-model="enableIndexing" ng-checked="enableIndexing">Do not index my Yajidu freelancer profile in search engines 
+              </label>
+           </div> 
+           <h4>Your Client Profile</h4>
+           <div class="checkbox">
+            <label>
+              <input type="checkbox" name="enableJobPostIndexing" data-ng-model="enableJobPostIndexing" ng-checked="enableJobPostIndexing" >Keep my Yajidu activity private and do not show the following to the public
+            </label>
+            <ul>
+                <li>Job titles and hiring descriptions</li>
+                <li>Exact spending amount</li>
+                <li>Freelancers who work on my Yajidu jobs</li>
+            </ul>
+           </div>
+           <div>
+         <button type="submit" class="btn btn-primary">Save</button>
+       </div> 
+       </form>
+
+
+        
+       </div>
+
+</section>

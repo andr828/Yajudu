@@ -1,0 +1,62 @@
+<section class="row" data-ng-controller="JobsController" data-ng-init="caculateStats();">
+    <!-- <div ng-include="'./modules/jobs/views/partials/jobs-header.client.view.html'"></div> -->
+    <div class="col-sm-offset-1 col-sm-10">
+    	<br />
+        <div>
+            <div class="row" >
+                <div class="col-sm-3">
+                    {{jobs.length}} Jobs Posted
+                </div>
+                <div class="col-sm-3">
+                    {{awardedJobs.length}} Jobs Awarded
+                    <br>
+                    {{awardRatio | number : 1}}% Award Ratio 
+                </div>
+                <div class="col-sm-3">
+                    {{ratedJobs.length}} Feedback Given
+                    <br>
+                    {{receivedFeedbacks.length}} Feedback Received
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <table class="table table-hover" ng-hide="jobs.length == 0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Expired</th>
+                    <th>Posted</th>
+                    <th>Expires</th>
+                    <th colspan="2">Action</th>
+                    <tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="job in jobs">
+                    <td>{{job.name}}</td>
+                    <td>{{job.category.name}}, {{job.subcategory.name}}</td>
+                    <td>{{job.status}} <span data-ng-show="job.status == 'Pending'"> Approval</span></td>
+                    <td>
+                        <span data-ng-show="job.status == 'Approved'">{{job.isExpired ? 'Yes' : 'No'}}</span> 
+                        <span data-ng-hide="job.status == 'Approved'"> - </span> 
+                    </td>
+                    <td>{{job.created | date : 'MMM d-yyyy'}}</td>
+                    <td><span data-ng-show="job.status == 'Approved'">{{job.ValidTill | date : 'MMM d-yyyy'}}</span><span data-ng-show="job.status != 'Approved'"> - </span></td>
+                    <td >
+                    	<a data-ng-href="#!/jobs/{{job._id}}/edit" ng-show="job.status=='Draft'">Edit</a>
+                    	<a data-ng-href="#!/jobs/{{job._id}}" ng-show="job.status=='Approved'">Proposals</a>
+                        <a data-ng-href="#!/jobs/{{job._id}}" ng-show="job.status=='Pending'">View</a>
+
+                        
+
+                   	</td>
+                    <td>
+                        <a data-ng-href="#!/jobs/{{job._id}}/renew/edit" class="btn btn-primary" ng-show="job.isExpired && job.status !== 'Pending' && job.isAwarded === false">Renew</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

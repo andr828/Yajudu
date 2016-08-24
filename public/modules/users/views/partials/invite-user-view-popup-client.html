@@ -1,0 +1,49 @@
+<div class="modal-header">
+<h3 class="modal-title"> Invite User</h3> 
+</div>
+<div class="modal-body">
+	<div class="row">
+        <div class="form-group col-md-12" data-ng-show="approvedJobs.length>0">
+                <div data-ng-repeat="job in approvedJobs">
+                    <label>
+                        <input type="radio" name="selectedJobId" ng-value="job._id" data-ng-model="$parent.selectedJobId"/>
+                        {{job.name}}
+                    </label>
+                </div>
+        </div>
+
+        <div data-ng-hide="approvedJobs.length>0">
+            <div class="form-group col-md-12">
+                    <div>
+                        <label>
+                            <input type="radio" name="postJob" data-ng-model="postJob"/>
+                            Post a job
+                        </label>
+                    </div>
+
+            </div>
+        </div>
+
+
+
+        <div data-ng-show="error" class="text-danger">
+            - <strong data-ng-bind="error"></strong>
+        </div>  
+
+	</div>
+</div>
+<div class="modal-footer">
+	<a data-ng-show="approvedJobs.length>0" class="hyperlink btn btn-success" ng-click="invite(selectedJobId);">Invite</a>
+    <a data-ng-href="#!/post-a-job" data-ng-click="cancel()" data-ng-hide="approvedJobs.length>0" class="btn btn-success">Proceed</a>
+    <a class="hyperlink btn btn-warning" ng-click="cancel()">Cancel</a>
+</div>
+<script type="text/javascript">
+        $(document).ready(function(){
+            // $.material.init();
+        });
+</script>
+<style type="text/css">
+	.notbold{
+    	font-weight:normal
+	}	​
+</style>

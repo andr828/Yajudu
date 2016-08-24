@@ -1,0 +1,51 @@
+<section class="row well" data-ng-controller="SettingsController" ng-init = "initUserProfile(); initSpecialities();">
+	<div ng-include="'./modules/users/views/partials/profile-header.client.view.html'"></div>
+	<div class="col-md-10">
+		<div ng-include="'./modules/users/views/partials/profile-header-user-intro-client-view.html'"></div>
+				<!-- <div>
+					<a class="hyperlink" ng-click="openChooseSpecialities()">Choose your specialities</a>
+				</div> -->
+				<div data-ng-show="!isVisitor">
+					<h4>
+						<a class="hyperlink btn btn-material-light-blue btn-raised" ng-click="openChooseSpecialities()">Choose your specialities</a>
+					</h4>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+					<div data-ng-repeat="category in categories | orderBy:'name'" data-ng-show="user.categories.indexOf(category._id) > -1">
+	                        <div>
+	                        	<span style="font-weight:300; font-size:16px;">{{category.name}}</span> : <span data-ng-repeat="subcategory in subcategories | orderBy:'name'">
+	                        	<span data-ng-if="subcategory.category.name == category.name"
+	                        		data-ng-show="user.subcategories.indexOf(subcategory._id) > -1">&nbsp;&nbsp;
+	                            		<span class="notbold">
+	                            			<a class="notbold" data-ng-href="#!/contractors/by-subcategory-id/55eea98bdd1702dd02cf7044" class="ng-binding"><u>{{subcategory.name}}</u></a>
+	                            			<!-- <span data-ng-hide="$last">,</span> -->
+	                            		</span>
+		                        </span>
+		                    </span> 
+	                        </div>
+	                    	
+		            </div>
+		        </div>
+				</div>
+				<br>
+				
+				
+			</fieldset>
+		</form>
+	</div>
+	<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+    // $('.popover').popover(); 
+    // $.material.init();
+
+});
+</script>
+<style type="text/css">
+	.notbold{
+    	font-weight:normal
+	}	​
+</style>
+
+</section>

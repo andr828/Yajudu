@@ -1,0 +1,58 @@
+<div class="col-md-2" style="border-right:1px solid #abcdef;">
+    <img src="{{user.profilePictureURL}}" width="160px" style="background-color:white; border:1px solid #eee; padding:2px; border-radius:5px;">
+    <ul class="nav nav-pills nav-stacked" data-ng-hide="isVisitor">
+        <li  ng-class="$state.current.name=='profile' ? 'active' : ''" >
+            <a class="nav-pill-link " href="/#!/settings/profile" data-ng-hide="isVisitor"><span class="span-item">Overview</span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'job-history-by-user-id' ? 'active' : ''">
+            <a class="nav-pill-link"  href="/#!/profile/job-history-by-user-id/{{user._id}}"><span class="span-item">Yajidu History  </span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'specialities' ? 'active' : ''" data-ng-show="user.roles[0] != 'client'">
+            <a class="nav-pill-link"  href="/#!/settings/specialities/{{user._id}}"><span class="span-item">Specialities  </span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'profile-reviews' ? 'active' : ''">
+            <a class="nav-pill-link"  href="/#!/profile/reviews/{{user._id}}"><span class="span-item">Reviews</span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'portfolio' ? 'active' : ''" data-ng-show="user.roles[0] != 'client'">
+            <a class="nav-pill-link"  href="/#!/settings/portfolio/{{user._id}}"><span class="span-item">Portfolio  </span></a>
+        </li>
+        <!-- <li   ng-class="$state.current.name== 'skills-edit' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/profile/skills"><span class="span-item">Skills  </span></a>
+        </li> -->
+        <li   ng-class="$state.current.name== 'edit-company' ? 'active' : ''" ng-show="user.companyName">
+            <a class="nav-pill-link" href="/#!/settings/edit/company"><span class="span-item">About the Company  </span></a>
+        </li>
+        <hr>
+        <li   ng-class="$state.current.name== 'contact-Info' ? 'active' : ''">
+            <a class="nav-pill-link"   href="/#!/profile/contact-Info/{{user._id}}"><span class="span-item">Contact Info  </span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'privacy-settings' ? 'active' : ''" data-ng-if="user.roles[0] === 'freelancer'">
+            <a class="nav-pill-link"  href="/#!/settings/privacy"><span class="span-item">Privacy Settings</span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'profile-view' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/profile/{{user._id}}"><span class="span-item">Public View of Profile  </span></a>
+        </li>
+    </ul>
+    <ul class="nav nav-pills nav-stacked" data-ng-show="isVisitor">
+        <li  ng-class="$state.current.name=='profile-view' ? 'active' : ''" >
+            <a class="nav-pill-link " href="/#!/profile/{{user._id}}" data-ng-show="isVisitor"><span class="span-item">Overview</span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'job-history' ? 'active' : ''">
+            <a class="nav-pill-link"  href="/#!/profile/job-history-by-user-id/{{user._id}}"><span class="span-item">Yajidu History  </span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'specialities' ? 'active' : ''" data-ng-show="user.roles[0] != 'client'">
+            <a class="nav-pill-link"  href="/#!/settings/specialities/{{user._id}}"><span class="span-item">Specialities  </span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'profile-reviews' ? 'active' : ''">
+            <a class="nav-pill-link"  href="/#!/profile/reviews/{{user._id}}"><span class="span-item">Reviews</span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'portfolio' ? 'active' : ''" data-ng-show="user.roles[0] != 'client'">
+            <a class="nav-pill-link"  href="/#!/settings/portfolio/{{user._id}}"><span class="span-item">Portfolio  </span></a>
+        </li>
+        <li   ng-class="$state.current.name== 'contact-Info' ? 'active' : ''">
+            <a class="nav-pill-link"  ng-show="user.contactInfoVisibility == 'contact_all'" href="/#!/profile/contact-Info/{{user._id}}"><span class="span-item">Contact Info  </span></a>
+        </li>
+    </ul>
+
+</div>
+

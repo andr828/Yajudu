@@ -1,0 +1,11 @@
+<h3 data-ng-hide="user.addDisplayOptions == 'hide_name'" class="text-capitalize">
+	{{user.displayName}} 
+	<!-- <star-rating ng-model="user.averageRating" max="10" readonly="true"></star-rating> -->
+</h3>
+<h3 data-ng-show="user.addDisplayOptions === 'hide_name' && (authentication.user.roles[0] === 'admin' || !isVisitor)" class="text-capitalize">
+	{{user.displayName}} 
+	<!-- <star-rating ng-model="user.averageRating" max="10" readonly="true"></star-rating> -->
+</h3>
+<strong>{{user.tagLine}}</strong>
+<div><small>{{user.cityStateCountry}}</small></div>
+<hr />

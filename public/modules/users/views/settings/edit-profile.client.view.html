@@ -1,0 +1,233 @@
+<section class="row" data-ng-controller="SettingsController" ng-init = "initForm(); loadCountries();">
+	<div ng-include="'./modules/users/views/partials/profile-header.client.view.html'"></div>
+	<div class="col-md-6">
+		<div class="alert alert-success" role="alert" ng-show="isFirstVisit">
+			Please complete your profile!
+		</div>
+		<h3 >
+			<span data-ng-show="user.roles[0] == 'freelancer'">Your Talent</span>
+			<span data-ng-show="user.roles[0] == 'client'">My</span>
+			Profile <star-rating data-ng-model="user.averageRating" max="10" readonly="true"></star-rating></h3>
+			<br/>
+		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin " autocomplete="off">
+			<fieldset>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label for="firstName">First Name</label>
+						<input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" >
+					</div>
+					<div class="col-sm-6">
+						<label for="lastName">Last Name</label>
+						<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" >
+					</div>
+					
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label for="displayName" class="control-label">Display Name</label>
+						<input type="text" id="displayName" name="displayName" class="form-control" data-ng-model="displayName" >
+					</div>
+					<div class="col-sm-6">
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email" readOnly="readOnly" class="form-control" data-ng-model="user.email" >
+					</div>
+					
+				</div>
+				<div class="form-group" data-ng-hide="user.provider !== 'local'">
+					<div class="col-sm-12">
+						<label for="username">User Name</label>
+						<input type="text" id="username" name="username" readOnly="readOnly" class="form-control" data-ng-model="user.username" >
+					</div>
+				</div>
+				<div class="form-group" data-ng-show="user.roles[0] != 'client'">
+					<div class="col-sm-12">
+						<label for="tagLine" >Tag Line</label>
+						<input type="text" id="tagLine" name="tagLine" class="form-control" data-ng-model="user.tagLine" maxlength="160">
+					</div>
+				</div>
+
+				<div class="form-group" data-ng-hide="user.provider !== 'local'">
+					<div class="col-sm-5">
+                		<label for="addressLine3">Choose Profile Picture / Logo</label>
+                		<input type='file' class="form-control form-control-small" ng-model='file' accept="image/*" base-sixty-four-input>
+                	</div>
+                	<div class="col-sm-2">
+                		<h1>OR</h1>
+                	</div>
+                
+	                <div class="col-sm-5">
+	                	<br>
+						<a class="hyperlink" ng-click="openSelectAvatar(user)">Choose avatar</a>
+					</div>
+				</div>
+                <!-- <div class="form-group">
+					<label for="hourlyRate">Hourly Rate</label>
+					<div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" id="hourlyRate" name="hourlyRate" class="form-control" data-ng-model="user.hourlyRate" placeholder="0.0">
+				      <div class="input-group-addon">/hr</div>
+				    </div>
+					
+				</div> -->
+				<div class="form-group" ng-hide="user.roles[0]=='client'">
+					<div class="col-sm-12">
+						<label for="shortProfile">Short Profile</label>
+						<textarea id="shortProfile" name="shortProfile" class="form-control" rows="5" data-ng-model="user.shortProfile" 
+						data-toggle="popover" title="Guidance Note:" 
+						data-placement="right"
+						data-trigger="focus" 
+						data-content="Keep it precise and personal, best way to showcase who you are in three sentences!">
+						</textarea> 
+					</div>
+				</div>
+				<div class="form-group" ng-hide="user.roles[0]=='client'">
+					<div class="col-sm-12">
+						<label for="educationAndExperience">Education & Experience</label>
+						<textarea id="educationAndExperience" name="educationAndExperience" rows="5" class="form-control" data-ng-model="user.educationAndExperience"
+						data-toggle="popover" title="Guidance Note:" 
+						data-placement="right" 
+						data-trigger="focus"
+						data-content="Tell us where you studied and where you worked.">
+						</textarea> 
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label for="phoneNumber">Phone Number</label>
+						<input type="text" id="phoneNumber" name="phoneNumber" class="form-control" data-ng-model="user.phoneNumber" ui-mask="{{'(999) 99-9999999'}}" >
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label for="interests">Interests</label>
+						<input type="text" id="interests" name="interests" class="form-control" data-ng-model="user.interests" >
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label for="dob">Date of Birth</label>
+						<input type="text" id="datepicker" name="dob" class="form-control" data-ng-model="user.dob">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label for="nationality" >Nationality</label>
+						<select id="nationality" name="nationality" class="form-control notbold" data-ng-model="user.nationality">
+							<option value=""> --select--</option>
+							<option data-ng-selected="country.name == user.nationality" data-ng-repeat="country in countries" value={{country.name}}>{{country.name}}</option>
+						</select>
+					</div>
+				</div>
+			
+
+				
+				<!-- <div class="form-group">
+					<label for="country">Country</label>
+					<select id="country" name="country" class="form-control notbold" ng-disabled="true" data-ng-model="user.country">
+						<option data-ng-selected="country.name == user.country" data-ng-repeat="country in countries" value={{country.name}}>{{country.name}}</option>
+					</select>
+				</div>
+				<div data-ng-show="user.country == 'Qatar'">
+					<div class="form-group">
+						<label for="city">City</label>
+						<select id="city" name="city" class="form-control notbold" data-ng-model="user.city" ng-change="getLocationsByCityId('');">
+
+							<option data-ng-selected="city.name == user.city" data-ng-repeat="city in cities  | orderBy: 'name'" value="{{city.name}}">{{city.name}}</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="location">Area</label>
+						<select id="location" name="location" class="form-control notbold" data-ng-model="user.location">
+							<option value="">-- select --</option>
+							<option data-ng-selected="location.name == user.location" data-ng-repeat="location in locations | orderBy: 'name'" value={{location.name}}>{{location.name}}</option>
+						</select>
+					</div>
+				</div> -->
+				<!-- <div data-ng-show="user.country != 'Qatar'">
+					<label for="city">City</label>
+					<input type="text" id="city" name="city" class="form-control" data-ng-model="user.city" placeholder="city">
+					<label for="location">Area</label>
+					<input type="text" id="location" name="location" class="form-control" data-ng-model="user.location" placeholder="location">
+				</div> -->
+				<!-- <div class="form-group">
+					<label for="addressLine3">Location, City, Country</label>
+					<input type="text" id="addressLine3" name="cityStateCountry" class="form-control" data-ng-model="user.cityStateCountry" placeholder="City, State/Province, Country" ng-readOnly="true">
+				</div> -->
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label for="addressLine3">Display Options</label>
+						<div class="radio">
+						<label><input type="radio" name="addDisplayOptions" value="hide_phone" data-ng-model="user.addDisplayOptions" ng-checked="user.addDisplayOptions === 'hide_phone'"  />
+							Phone number is not shown
+						</label>
+						</div>
+						<div class="radio">
+							<label><input type="radio"  name="addDisplayOptions" value="hide_name"  data-ng-model="user.addDisplayOptions" ng-checked="user.addDisplayOptions === 'hide_name'"/>
+							Display all except your name
+						</label>
+						<div class="radio">
+								<label><input type="radio" name="addDisplayOptions" value="display_none" data-ng-model="user.addDisplayOptions"  ng-checked="user.addDisplayOptions === 'display_none'"/>
+							Hide details only display Name and Short Profile
+						</label>
+						</div>
+						</div>
+					</div>
+				</div>
+
+
+				
+				<!-- <div class="form-group">
+					<label for="addressLine3">Contact Information Visibility (in your profile)</label>
+					<div class="radio">
+						<label><input type="radio"  name="contactInfoVisibility" value="contact_all"  data-ng-model="user.contactInfoVisibility"  />
+							All contact fields
+						</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="contactInfoVisibility" value="contact_short" data-ng-model="user.contactInfoVisibility" />
+						Only non-name fields (email, phone, fax, website)
+					</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="contactInfoVisibility" value="contact_none"  data-ng-model="user.contactInfoVisibility" />
+						No contact fields
+					</label>
+					</div>
+				</div> -->
+				<div class="form-group">
+					<div class="col-sm-12">
+						<div class="alert alert-success" role="alert" ng-show="success">
+							Profile Saved Successfully
+						</div>
+						<div class="alert alert-danger" role="alert" ng-show="error">
+							<strong data-ng-bind="error"></strong>
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-large btn-primary">Save Profile</button>
+						</div>
+					</div>
+				</div>
+				
+			</fieldset>
+		</form>
+	</div>
+	<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+    // $('.popover').popover(); 
+    $( "#datepicker" ).datepicker({ minDate: "-115Y", maxDate: "1Y", changeMonth: true, changeYear: true, defaultDate: new Date(1980, 00, 01)});
+    // $.material.init();
+
+    
+
+});
+</script>
+<style type="text/css">
+	.notbold{
+    	font-weight:normal
+	}	​
+</style>
+
+</section>

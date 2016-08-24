@@ -1,0 +1,118 @@
+<div class="modal-header">
+    <h3 class="modal-title">Create Proposal For This Job</h3>
+</div>
+<div class="modal-body">
+    <form data-ng-submit="create()">
+        <div class="content">
+            <div class="radio paddingb30 col-lg-12">
+                <p class="colorBlue pull-left col-xs-12 padding0">Privacy</p>
+                <div class="col-xs-6">
+                    <label>
+                        <input id="optionsRadios1" type="radio" checked="" value="option1" name="optionsRadios">Include My Contact Details</label>
+                </div>
+                <div class="col-xs-6">
+                    <label>
+                        <input id="optionsRadios2" type="radio" checked="" value="option1" name="optionsRadios">Don’t Include My Contact Details</label>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <p class="colorBlue pull-left col-xs-12 padding0">Hiring maid for the office to work from 9 to 5</p>
+                <div class="col-lg-7  paddingleft0">
+                    <textarea id="exampleTextarea" ng-model="proposal.experience" class="form-control" rows="3" placeholder="Describe your relevant experiences and qualitifications"></textarea>
+                </div>
+                <div class="col-lg-5 yellowbg yellowborder font12">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu varius lacus, a malesuada ligula. Nulla eget ultrices diam, quis facilisis magna. Sed justo lectus, mollis eu metus consequat, malesuada auctor mi.
+                </div>
+                <div class="col-lg-7  paddingleft0">
+                    <textarea id="exampleTextarea1" ng-model="proposal.jobApproach" class="form-control" rows="3" placeholder="Describe your relevant experiences and qualitifications"></textarea>
+                </div>
+                <div class="col-lg-5 yellowbg yellowborder font12">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu varius lacus, a malesuada ligula. Nulla eget ultrices diam, quis facilisis magna. Sed justo lectus, mollis eu metus consequat, malesuada auctor mi.
+                </div>
+                <p class="colorBlue pull-left col-xs-12 paddingleft0">COST & TIME</p>
+                <div class="col-lg-4 padding0">
+                    <input id="exampleInputEmail1" ng-model="proposal.myEarnings" class="form-control" type="text" placeholder="QAR">
+                </div>
+                <div class="col-lg-4">
+                    <input id="exampleInputEmail11" class="form-control" type="text" placeholder="Duration" ng-model="proposal.estimatedDuration">
+                </div>
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-primary paddingleft" ng-click="create()">Apply Now</button>
+                </div>
+                <div class="col-lg-2 paddingleft">
+                    <button type="button" class="btn btn-success " ng-click="cancel()">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <!--     <button class="btn btn-primary" ng-click="send()">Apply Now</button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
+ -->
+</div>
+<!-- <div class="modal-header">
+    <h3 class="modal-title">Review Proposal!</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" data-ng-submit="create()" novalidate data-ng-hide="job.isAwarded">
+        <h4>{{proposalState === 'edit' ? 'Revise Your Proposal' : 'Create a proposal for this job'}}</h4>
+        <h4 class="alert alert-danger" data-ng-show="proposal.status === 'withdraw'">
+                    You have withdrawn your proposal
+                </h4>
+        <p>Don't include contact info.</p>
+        <b>Describe your relevant experience and qualifications.</b>
+        <textarea name="proposal.experience" ng-model="proposal.experience" class="form-control" style="height:150px"></textarea>
+        <br>
+        <b>Outline your approach to the job, or ask for more info.</b>
+        <textarea name="proposal.jobApproach" ng-model="proposal.jobApproach" class="form-control" style="height:150px"></textarea>
+        <p><b>Cost And Timmings</b></p>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Bid for job <small>(optional)</small></label>
+            <div class="col-sm-5">
+                <div class="input-group">
+                    <div class="input-group-addon">QAR</div>
+                    <input style="width: 158%;" type="number" ng-model="proposal.myEarnings" name="proposal.myEarnings">
+                    <div class="input-group-addon" ng-show="job.chargingType == 'Hourly'">/hr</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-show="job.chargingType == 'Hourly'">
+            <label class="col-sm-4 control-label">Hours <small>(optional)</small></label>
+            <div class="col-sm-5">
+                <input type="number" name="proposal.hours" ng-model="proposal.hours" /> <span>/week</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Duration and timings</label>
+            <div class="col-sm-5">
+                <div class="input-group">
+                    <input onfocus="this.placeholder = ''" onblur="this.placeholder = 'please enter Duration and timings'" style="width:150%" placeholder="please enter Duration and timings" name="proposal.estimatedDuration" ng-model="proposal.estimatedDuration">
+                </div>
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-3">
+                <input ng-show="!job.isAwarded && !isJobExpired" type="submit" value="{{proposalState === 'edit' ? 'Revise it' : 'Submit proposal'}}" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="Accept(proposal.job)">Accept</button>
+    <button class="btn btn-danger" ng-click="Reject(proposal.job)">Reject</button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
+</div>
+<style type="text/css">
+.proposal {}
+
+.proposal .profilelink {
+    font-size: 20px;
+}
+
+.proposal-footer {
+    padding: 3px;
+    background: #eee;
+}
+</style> -->

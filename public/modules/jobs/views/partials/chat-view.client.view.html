@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <h3 class="modal-title">Messages</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12" >
+            <div class="bs-component panel-body">
+                <div class="list-group">
+                    <div ng-repeat="message in messagesList">
+                        <div class="list-group-item"  >
+                            <div class="row-picture">
+                                <img class="circle" src="./uploads/{{message.sender.profilePicture}}" alt="icon">
+                            </div>
+                            <div class="row-content">
+                                <div class="least-content">{{message.created | date : 'MMM d-yyyy HH:mm'}}</div>
+                                <h4 class="list-group-item-heading">{{message.sender.displayName}}</h4>
+                                <p class="list-group-item-text">{{message.msg}}</p>
+                            </div>
+                        </div>
+                        <div class="list-group-separator"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <input id="btn-input" ng-model = "typedMessage" size = "50" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+    <br/>
+    <button class="btn btn-primary" ng-click="sendMessage()">Send</button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
+ </div>
+
+<style type="text/css">
+    .proposal { 
+        
+    }
+    .proposal .profilelink{
+        font-size: 20px;
+    }
+    .proposal-footer{
+        padding: 3px;
+        background: #eee;
+    }
+</style>
+<style type="text/css">
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: 350px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #FeFeFe;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #2196f3;
+}
+</style>

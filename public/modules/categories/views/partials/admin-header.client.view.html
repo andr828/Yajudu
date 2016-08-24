@@ -1,0 +1,42 @@
+<div class="col-md-2">
+    <!-- <img width="100%" src="/modules/core/img/brand/logo.png" style="border:1px solid grey; border-radius:5px; padding:2px;" /> -->
+   
+    <ul class="nav nav-pills nav-stacked">
+        <!-- <li id="nav-left-li-" data-ng-class="currentState == 'Skills' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/skills"><span class="span-item">Skills  </span></a>
+        </li> -->
+        <li id="nav-left-li-" data-ng-class="currentState == 'Category' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/categories"><span class="span-item">Category </span></a>
+        </li>
+        <li id="nav-left-li-" data-ng-class="currentState == 'Sub Category' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/subcategories"><span class="span-item">Sub Category</span></a>
+        </li>
+        <li id="nav-left-li-" data-ng-init="loadCountForBadge()" data-ng-class="currentState == 'Job Moderation' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/jobs-moderation">
+                <span class="span-item">Job Moderation</span>
+                <span class="badge">{{modejobsCount}}</span>
+            </a>
+        </li>
+        <li id="nav-left-li-" data-ng-init="loadCountForBadge()" data-ng-class="currentState == 'Proposal Moderation' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/proposals-moderation">
+                <span class="span-item">Proposal Moderation</span>
+                <span class="badge">{{proposalsCount}}</span>
+            </a>
+        </li>
+        <li id="nav-left-li-" data-ng-class="currentState == 'Users Moderation' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/settings/users-moderation">
+                <span class="span-item">Users Moderation</span>
+            </a>
+        </li>
+        <li id="nav-left-li-" data-ng-class="currentState == 'Interests' ? 'active' : ''">
+            <a class="nav-pill-link" href="/#!/settings/interested-users">
+                <span class="span-item">Interests</span>
+            </a>
+        </li>
+        
+    </ul>
+
+</div>
+
+
+</section>

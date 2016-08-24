@@ -1,0 +1,46 @@
+<section class="row well" data-ng-controller="SettingsController" ng-init = "initUserProfile(); initSpecialities();">
+	<div ng-include="'./modules/users/views/partials/profile-header.client.view.html'"></div>
+	<div class="col-md-6">
+		<div ng-include="'./modules/users/views/partials/profile-header-user-intro-client-view.html'"></div>
+				<!-- <div>
+					<a class="hyperlink" ng-click="openChooseSpecialities()">Choose your specialities</a>
+				</div> -->
+				<div data-ng-show="!isVisitor">
+					<h4>
+						<a class="hyperlink" ng-click="openChooseSpecialities()">Choose your specialities</a>
+					</h4>
+				</div>
+				<div class="row">
+					<div data-ng-repeat="category in categories | orderBy:'name'" calss="col-md-6" data-ng-show="user.categories.indexOf(category._id) > -1">
+	                	<div class="col-md-6"> 
+	                        <b>{{category.name}}<b>
+	                    	<div data-ng-repeat="subcategory in subcategories | orderBy:'name'">
+	                        <div data-ng-if="subcategory.category.name == category.name"
+	                        data-ng-show="user.subcategories.indexOf(subcategory._id) > -1">&nbsp;&nbsp;
+	                            <span class="notbold"><a class="notbold" data-ng-href="#!/talent/by-subcategory-id/55eea98bdd1702dd02cf7044" class="ng-binding">{{subcategory.name}}</a></span>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+				</div>
+				<br>
+				
+				
+			</fieldset>
+		</form>
+	</div>
+	<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+    // $('.popover').popover(); 
+    // $.material.init();
+
+});
+</script>
+<style type="text/css">
+	.notbold{
+    	font-weight:normal
+	}	​
+</style>
+
+</section>

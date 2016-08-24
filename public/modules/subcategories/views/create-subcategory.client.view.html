@@ -1,0 +1,47 @@
+<section class="row" data-ng-controller="SubcategoriesController" data-ng-init="loadSeed(); auth();">
+     <div ng-include="'./modules/categories/views/partials/admin-header.client.view.html'"></div>
+    <div class="col-md-10">
+   <div class="page-header">
+        <h1>New Subcategory</h1>
+    </div>
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="category">Category</label>
+                    <div class="controls">
+                        <select class="form-control" data-ng-model="category">
+                            <option value="" ng-selected="true">--Select--</option>
+                            <option ng-repeat="_category in categories" 
+                                    value="{{_category._id}}" >{{_category.name}}</option>
+                       </select>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                          <input data-ng-model="isActive" data-ng-checked="true" id="isActive" type="checkbox"> Is Active
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-raised">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        // $('[data-toggle="popover"]').popover(); 
+        // $('.popover').popover(); 
+        // $.material.init();
+
+    });
+    </script>
+</section>

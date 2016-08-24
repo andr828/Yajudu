@@ -1,0 +1,27 @@
+<section class="row " data-ng-controller="SettingsController" data-ng-init=" initUserProfile();">
+<div ng-include="'./modules/users/views/partials/profile-header.client.view.html'"></div>
+<div class="col-md-6">
+		<div ng-include="'./modules/users/views/partials/profile-header-user-intro-client-view.html'"></div>
+		<h4>Contact Info</h4>
+		<h5>Primary Contact</h5>
+		<p data-ng-hide="user.addDisplayOptions === 'display_none'">
+		<!-- <span ng-show="user.companyName" style="font-weight:bold">{{user.companyName}}</span> -->
+		<span>Username: {{user.username}}</span>
+		<br />
+		<span data-ng-show="!isVisitor || hasRelation">Email: <a href="mailto:{{user.email}}">{{user.email}}</a></span><br>
+		<span data-ng-hide="!user.phoneNumber || user.addDisplayOptions=='hide_phone' || user.addDisplayOptions=='display_none'"
+		data-ng-show="hasRelation"
+		>Contact Number: {{user.phoneNumber}}</span>
+		</p>
+		<!-- <h5 ng-show="user.companyName">Company Information</h5> -->
+		<p data-ng-show="user.addDisplayOptions == 'display_none'">
+			<!-- {{user.addressLine1}} <br />
+			{{user.addressLine2}} <br />
+			{{user.cityStateCountry}} <br /> -->
+			Contact details are hidden by user
+		</p>
+	</div>
+	<div class="col-md-4">
+	</div>
+
+</section>

@@ -1,0 +1,181 @@
+<section class="row " data-ng-controller="JobsController" data-ng-init="initForm();findOne();">
+    <div class="page-header">
+        <h1>Edit Job</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name your Job</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="job.name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Describe it</label>
+                    <div class="controls">
+                        <textarea data-ng-model="job.description" name="description" class="form-control" rows="6" required></textarea>
+                        <!-- <input type="text" data-ng-model="description" id="description" class="form-control" placeholder="Name" required> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Select the category of work</label>
+                    <div class="controls">
+                        <select class="form-control"  data-ng-model="job.category" ng-change="loadSubcategories()">
+                            <option ng-repeat="category in categories" ng-selected="category._id == job.category" value="{{category._id}}">{{category.name}}</option>
+                        </select>
+                        <br />
+                        <select class="form-control" data-ng-model="job.subcategory">
+                            <option ng-repeat="sc in subcategories" ng-selected="sc._id == job.subcategory._id" value="{{sc._id}}">{{sc.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Select Experience Level</label>
+                    <div class="row">
+                        <div class="col-sm-6">
+                             <select name="experienceLevel" class="form-control" ng-model="job.experienceLevel">
+                                <option value="Company">Company</option>
+                                <option value="Professional">Professional</option>
+                                <option value="Starter">Starter</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Request specific skills or groups <span style="color:#999; font-weight:normal">(optional)</span></label>
+                    <div class="controls">
+                        <angucomplete-alt id="ex1" placeholder="Search Skills" pause="100" selected-object="selectedSkill" local-data="skills" search-fields="name" title-field="name" minlength="1" input-class="form-control form-control-small" />
+                        <br />
+                        
+                    </div>
+                    <div>
+                        <input type="button" value="Add" ng-click="addSkill()" class="btn btn-primary" />
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>   
+                        </thead>    
+                        <tbody>
+                            <tr ng-repeat="skill in addedskills">
+                                    <td>{{skill.name}}</td>
+                                    <td><a ng-click="removeSkill(skill)">X</a> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Set work arrangement<span style="color:#999; font-weight:normal">(optional)</span></label>
+                    <div class="controls">
+                        <!-- <input type="text" data-ng-model="description" id="description" class="form-control" placeholder="Name" required> -->
+                        <select ng-model="job.chargingType" class="form-control" ng-change="chargingTypeChanged()">
+                            <option value="Hourly">Hourly</option>
+                            <option value="Fixed Price">Fixed Price</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select ng-model="job.hourlyRate" ng-show="job.chargingType == 'Hourly'" class="form-control">
+                            <option value="Less than QAR 10 / hr">Less than QAR 10 / hr</option>
+                            <option value="About QAR 10 to QAR 15 / hr">About QAR 10 to QAR 15 / hr</option>
+                            <option value="About QAR 15 to QAR 20 / hr">About QAR 15 to QAR 20 / hr</option>
+                            <option value="About QAR 20 to QAR 25 / hr">About QAR 20 to QAR 25 / hr</option>
+                            <option value="About QAR 25 to QAR 30 / hr">About QAR 25 to QAR 30 / hr</option>
+                            <option value="About QAR 30 to QAR 35 / hr">About QAR 30 to QAR 35 / hr</option>
+                            <option value="About QAR 35 to QAR 40 / hr">About QAR 35 to QAR 40 / hr</option>
+                            <option value="About QAR 40 to QAR 45 / hr">About QAR 40 to QAR 45 / hr</option>
+                            <option value="About QAR 45 to QAR 50 / hr">About QAR 45 to QAR 50 / hr</option>
+                            <option value="More than QAR 50 / hr">More than QAR 50 / hr</option>
+                            <option value="Decide later">Decide later</option>
+                        </select>
+                        <select ng-model="job.budget" ng-show="job.chargingType == 'Fixed Price'" class="form-control">
+                            <option value="Less than QAR 500">Less than QAR 500</option>
+                            <option value="Between QAR 500 and QAR 1,000">Between QAR 500 and QAR 1,000</option>
+                            <option value="Between QAR 1,000 and QAR 5,000">Between QAR 500 and QAR 1,000</option>
+                            <option value="Between QAR 5,000 and QAR 10,000">Between QAR 500 and QAR 1,000</option>
+                            <option value="More than QAR10,000">More than QAR 10,000</option>
+                            <option value="Decide later">Decide later</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="job.chargingType == 'Hourly'" >
+                    <!-- <label for="inputPassword3" class="col-sm-2 control-label">Password</label> -->
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" ng-model="job.hoursRequired" name="hoursRequired" placeholder="hrs / week">
+                    </div>
+                    <div class="col-sm-3">
+                        <span>hrs / week</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <select name="duration" class="form-control" ng-model="job.duration">
+                            <option value="1-2 weeks">1-2 weeks</option>
+                            <option value="3-4 weeks">3-4 weeks</option>
+                            <option value="1-3 months">1-3 Months</option>
+                            <option value="4-6 months">4-6 months</option>
+                            <option value="7-9 months">7-9 months</option>
+                            <option value="Decide Later">Decide Later</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div  style="border:0px solid black; ">
+                <div class="form-group" >
+                    <label class="control-label" for="name">Job posting visibility </label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="public" name="isPublicPosting" ng-model="job.isPublicPosting" checked> Public—Visible to everyone in the Yajudu community.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox" ng-checked="isSearchable=='true'" ng-model="job.isSearchable" ng-change="toggleIsSearchAble()"> Get more proposals. Allow search engines like Google to view this post.
+                        </label>
+                      </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio"  value="private" name="isPublicPosting" ng-model="job.isPublicPosting"
+                            ng-change="toggleIsSearchAbleToFalse()"> Private—Do not show on Yajidu jobs list. Only candidates I invite can respond.
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Post this job for</label>
+                    <select class="form-control col-sm-4" ng-model="job.visibilityDuration" name="visibilityDuration">
+                        <option value="1" ng-selected = "job.visibilityDuration == '1'">1 day</option>
+                        <option value="2" ng-selected = "job.visibilityDuration == '2'">2 days</option>
+                        <option value="3" ng-selected = "job.visibilityDuration == '3'">3 days</option>
+                        <option value="7" ng-selected = "job.visibilityDuration == '7'">7 days</option>
+                        <option value="15" ng-selected = "job.visibilityDuration == '15'">15 days</option>
+                        <option value="30" ng-selected = "job.visibilityDuration == '30'">30 days</option>
+                        <option value="60" ng-selected = "job.visibilityDuration == '60'">60 days</option>
+                        <option value="90" ng-selected = "job.visibilityDuration == '90'">90 days</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Proposed Start Date</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="jobStartOn" value="Immediate"  ng-model="job.jobStartOn" checked> Start immediately after proposal is selected.
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="jobStartOn" value="Later" > 
+                            Job will start on
+                        </label>
+                        <input type="text" ng-model="job.jobStartOnDate" ng-disabled="jobStartOn=='Immediate'"  name="jobStartOnDate" />
+                    </div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

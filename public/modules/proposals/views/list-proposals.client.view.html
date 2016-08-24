@@ -1,0 +1,89 @@
+<!-- <section data-ng-controller="ProposalsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Proposals</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="proposal in proposals" data-ng-href="#!/proposals/{{proposal._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="proposal.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="proposal.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="proposal.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!proposals.$resolved || proposals.length">
+    	No Proposals yet, why don't you <a href="/#!/proposals/create">create one</a>?
+    </div>
+</section> -->
+
+
+<section class="row" data-ng-controller="ProposalsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Proposal Requests</h1>
+    </div>
+    <div class="col-sm-8">
+         <table class="table table-hover">
+           <thead>
+             <tr>
+               <th>Job</th>
+               <th>Date Created</th>
+               <th>Date of Job Ending</th>
+               <th>Status</th>
+               <th>Withdraw Proposal</th>
+               <th>Reminder</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr ng-repeat="proposal in proposals">
+               <td>
+                    <a href="#!/jobs/{{proposal.job._id}}" class="text-capitalize">{{proposal.job.name}}</a>
+                </td>
+               <td >{{proposal.created | date: 'dd-MMM-yyyy'}}</td>
+               <td>{{proposal.job.ValidTill | date: 'dd-MMM-yyyy'}}</td>
+               <td>{{proposal.status}}</td>
+               <td><button class="btn btn-primary btn-raised" href=""
+                data-ng-disabled="proposal.job.isExpired || !proposal.status === 'approved' || !proposal.status === 'pending' || proposal.status === 'withdraw' || proposal.job.isAwarded"
+                data-ng-click="withdrawProposal(proposal)"
+                >Withdraw</button></td>
+               <td><button class="btn btn-primary btn-raised" 
+                data-ng-disabled="!proposal.job.isExpired || proposal.status!=='approved' || proposal.job.isAwarded || !proposal.canSendReminder" 
+                data-ng-click="sendReminder(proposal)"
+                href="">Send Reminder</button></td>{{ Date.now()}}
+             </tr>
+             
+           </tbody>
+         </table>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-success">
+  <div class="panel-heading">Invite Stats</div>
+  <div class="panel-body" style="font-size:12px;">
+    <div class="row">
+                  <div class="col-sm-8">Job Invites</div>
+                  <div class="col-sm-4">0</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-8">Submitted Proposals</div>
+                <div class="col-sm-4">{{proposals.length}}</div>  
+              </div>
+              <div class="row">
+                  <div class="col-sm-8">Declined</div>
+                  <div class="col-sm-4">{{rejectedProposals.length}}</div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-8">No Response</div>
+                  <div class="col-sm-4">{{noResponseProposals.length}}</div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-8">Response Rate</div>
+                  <div class="col-sm-4">{{responseRateProposals ? responseRateProposals:0 | number : 1}}%</div>
+              </div>
+              
+  </div>
+  
+</div>
+        
+    </div>
+</section>

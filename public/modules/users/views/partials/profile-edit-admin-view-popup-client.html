@@ -1,0 +1,83 @@
+<div class="modal-header">
+<h3 class="modal-title"> Edit User <span class="text-capitalize">({{user.roles[0]}})</span></h3> 
+</div>
+<div class="modal-body">
+	<div class="row">
+		<fieldset>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="displayName">Title</label>
+                    <input type="text" id="displayName" name="displayName" class="form-control" data-ng-model="user.displayName" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="tagLine">Tag Line</label>
+                    <input type="text" id="tagLine" name="tagLine" class="form-control" data-ng-model="user.tagLine" placeholder="tag line">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" readOnly="readOnly"  class="form-control" data-ng-model="user.email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="username">User Name</label>
+                    <input type="text" id="username" name="username" readOnly="readOnly" class="form-control" data-ng-model="user.username" placeholder="Username">
+                </div>
+                <div class="checkbox">
+                    <label style="margin-left:20px">
+                        <input type="checkbox" ng-checked="user.isActive===true" ng-model="user.isActive"> Active
+                    </label>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="hourlyRate">Hourly Rate</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">$</div>
+                      <input type="text" id="hourlyRate" name="hourlyRate" class="form-control" data-ng-model="user.hourlyRate" placeholder="0.0">
+                      <div class="input-group-addon">/hr</div>
+                    </div>
+                    
+                </div> -->
+                <div class="form-group" ng-hide="user.roles[0]=='client'">
+                    <label for="shortProfile">Short Profile</label>
+                    <textarea id="shortProfile" name="shortProfile" class="form-control" rows="5" data-ng-model="user.shortProfile" 
+                    data-toggle="popover" title="Guidance Note:" 
+                    data-placement="right"
+                    data-trigger="focus" 
+                    data-content="User are more likely to respond to short but precise profiles, this is a preview of your expertise and experience.">
+                    </textarea> 
+                </div>
+                <div class="form-group" ng-hide="user.roles[0]=='client'">
+                    <label for="educationAndExperience">Education & Experience</label>
+                    <textarea id="educationAndExperience" name="educationAndExperience" rows="5" class="form-control" data-ng-model="user.educationAndExperience"
+                    data-toggle="popover" title="Guidance Note:" 
+                    data-placement="right" 
+                    data-trigger="focus"
+                    data-content="Highlight your experience and education here remember you want to keep it relevant to your target jobs. We find it helps to provide as much information as possible to give yourself credibility.">
+                    </textarea> 
+                </div>
+        </fieldset>
+        <div data-ng-show="error" class="text-danger">
+            - <strong data-ng-bind="error"></strong>
+        </div>  
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-success" ng-click="save()">Save</button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
+</div>
+<script type="text/javascript">
+        $(document).ready(function(){
+            // $.material.init();
+        });
+</script>
+<style type="text/css">
+	.notbold{
+    	font-weight:normal
+	}	​
+</style>

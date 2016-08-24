@@ -1,0 +1,167 @@
+<section data-ng-controller="HeaderController" ng-init="init()">
+    <nav class="navbar whitebg nobg">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="assets/images/logo.png" /></a>
+            </div>
+            <div class="collapse navbar-collapse postion-r" id="myNavbar">
+                <ul class="nav navbar-nav postion-r">
+                    <li class="pullsearch">
+                        <div class="search-cont">
+                            <form ng-submit="search()" _lpchecked="1">
+                                <div class="input-group">
+                                    <input type="text" class="form-control search-style" aria-label="..." placeholder="Search" ng-model="searchText">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle talent-style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class=".text-capitalize">{{searchOption}}<span> <span class="caret"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-right custom-style2">
+                                            <li><a href="#" ng-click="searchOption='Talent'">Talent</a></li>
+                                            <li><a href="#" ng-click="searchOption='Job'">Jobs</a></li>
+                                        </ul>
+                                        <button class="btn btn-default Sr-btn" type="button" ng-click="search()" > <i class="fa fa-search fa-style" aria-hidden="true" ></i>
+                                        </button>
+                                        <input type="hidden" name="search_param" value="all" id="search_param">
+                                    </div>
+                                    <!-- /btn-group -->
+                                </div>
+                                <!-- /input-group -->
+                            </form>
+                        </div>
+                        <!-- /.col-md-6 -->
+                    </li>
+                    <!-- <li class="active"><a href="#!/talent/">Find Talent</a></li> -->
+                    <!--        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Jobs<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Page 1-1</a></li>
+            <li><a href="#">Page 1-2</a></li>
+            <li><a href="#">Page 1-3</a></li>
+          </ul>
+        </li> -->
+        <li data-ng-show="authentication.user && authentication.user.roles[0]=='freelancer'"><a href="#!/searchJob/">Find Jobs</a></li>
+                    <li data-ng-show="authentication.user"><a href="#!/searchJob/">My Jobs</a></li>
+                    <li data-ng-if="authentication.user && authentication.user.roles[0]=='client'"> <a href="#!/post-a-job">Post a Job</a></li>
+                    <li data-ng-show="authentication.user">
+                        <div class="notificaiton">
+
+<a href="javascript:void(0)"><span class="badge">5</span></a>
+
+ <div class="notificationContent">
+
+ 
+  <a class="whitetxt" data-toggle="dropdown" href="#"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="whitetxt"><i class="fa fa-flag" aria-hidden="true"></i>
+</span><span class=""></span></a></a>
+          <ul class="dropdown-menu custom-style topbtn_notificaiton dropdown-menu-right top-noti-ul">
+            
+           
+            
+            <li><div class="li-first">
+            <span class="pull-left">Notificaiton</span><span class="pull-right"><a href="#" class="capitalizet">Mark all as read</a> - <a href="#" class="capitalizet"> setting</a></span>
+            </div>
+            </li>
+            
+            
+            <li>
+            
+            <div class="li_content">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            you proposal to a job <span> "PSD to Wordpress"</span> was declined </p>
+            <p class="li_content_bottom">
+            <span class="li_image">
+            <i class="fa fa-times fa-1x declined"></i>
+            </span>
+            <span class="li_time">30 mint ago</span>
+            </p>
+            
+            </div>
+            
+            </li>
+            <li>
+             <div class="li_content">
+            <p>you proposal to a job <span> "PSD to Wordpress"</span> accepted </p>
+            <p class="li_content_bottom">
+            <span class="li_image">
+            <i class="fa fa-check-circle fa-1x accepted"></i>
+            </span>
+            <span class="li_time">30 mint ago</span>
+            </p>
+            
+            </div>
+            
+            
+            </li>
+            <li>
+            <div class="li_content">
+            <p>You got Review on <span> "PSD to Wordpress"</span> job </p>
+            <p class="li_content_bottom">
+            <span class="li_image">
+            <i class="fa fa-star fa-1x Review"></i>
+            </span>
+            <span class="li_time">30 mint ago</span>
+            </p>
+            
+            </div>
+            
+            
+            </li>
+            
+            
+            <li><div class="li-first aliencenter"> <span> <a href="#" class="capitalizet">Show All Notifications</a> </span>
+            </div>
+            </li>
+            
+          </ul>
+         
+ </div>
+ 
+ 
+ </div>
+ 
+                    </li>
+                    <li data-ng-show="authentication.user">
+                        <div class="profilebutton">
+                            <div class="dropdown">
+                                <button class="dropbtn">{{authentication.user.firstName}}</button>
+                                <div class="dropdown-content">
+                                    <a href="/#!/profile/" data-ng-show="authentication.user && authentication.user.roles[0]=='freelancer'">My Profile</a>
+                                    <a href="/#!/settings/profile" data-ng-show=" authentication.user && authentication.user.roles[0] !=='admin' ">Edit Profile</a>
+                                    <a href="/#!/settings/password">Change Password</a>
+                                    <a href="/auth/signout">Signout</a>
+                                </div>
+                                <div class="profilepic">
+                                    <img src="{{authentication.user.profilePictureURL}}" style="width:34px; border-radius:0px 3px 3px 0px" onError="this.onerror=null;this.src='assets/images/noavatar.jpg';" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li ng-if="!authentication.user">
+                        <a href="/#!/signup">Home</a>
+                    </li>
+                    <li ng-if="!authentication.user">
+                        <a href="/#!/signup">Sign up</a>
+                    </li>
+                    <li data-ng-if="!authentication.user">
+                        <a href="/#!/login">Log in</a>
+                    </li>
+                    <li data-ng-if="!authentication.user">
+                        <button type="button" class="btn btn-success">Post a Job</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container aliencenter">
+        <div class="bottomborder DisplayB" ng-show="authentication.user">
+        </div>
+        <div class="bottomborder-login DisplayB" ng-show="!authentication.user">
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    // $('.glyphicon').on('click', function() {
+    //     $('.btn-navbar').click(); //bootstrap 2.x
+    //     $('.navbar-toggle').click() //bootstrap 3.x by Richard
+    // });
+});
+</script>

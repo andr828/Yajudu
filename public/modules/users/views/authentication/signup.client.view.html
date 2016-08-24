@@ -1,0 +1,60 @@
+<section class="container aliencenter" data-ng-controller="AuthenticationController"  ng-init="loadCountries(); getListOfCities();">
+    
+    <div class="container ">
+        <div class="col-xs-2 "> </div>
+        <div class="col-xs-8 login-container aliencenter">
+            <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" autocomplete="off" >
+                <div class="col-xs-12">
+                    <h4 class=" text-uppercase search-style login-heading pull-left">CREATE YOUR ACCOUNT : </h4>
+                    <!-- data-toggle="buttons" -->
+                    <div class="btn-group pull-right login-heading" >
+                        <label class="btn btn-primary active" for="client">
+                            <input type="radio" value="client" ng-model="selectedRole" name="role" id="client"  style="display:none">I want to post a Job
+                        </label>
+                        <label class="btn btn-primary" for="freelancer">
+                            <input type="radio" value="freelancer" ng-model="selectedRole" name="role" id="freelancer" style="display:none" >I’m a Service Provider
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-6 pull-left">
+                    <input type="text" required id="firstName" name="firstName" class="form-control col-lg-12 login-input" data-ng-model="credentials.firstName" placeholder="First Name" required data-toggle="popover" title="Guidance Note:" data-placement="right" data-trigger="focus" data-content="Your name will be kept private and will not be displayed to others" tabindex="1">
+                    <input type="text" id="username" name="username" class="form-control col-lg-12 login-input" data-ng-model="credentials.username" placeholder="Username" required tabindex="3">
+                    <input type="password" id="password" name="password" class="form-control col-lg-12 login-input" data-ng-model="credentials.password" placeholder="Password (Min 6 charachters)" required tabindex="5">
+                    <select id="city" name="city" class="form-control" data-ng-model="credentials.city" ng-change="getLocationsByCityId('');" data-ng-show="selectedRole==='freelancer'" tabindex="7">
+                        <option data-ng-selected="city.name == credentials.city" data-ng-repeat="city in cities  | orderBy: 'name'" value={{city.name}}>{{city.name}}</option>
+                    </select>
+                </div>
+                <div class="col-xs-6 pull-right">
+                    <input type="text" id="lastName" name="lastName" class="form-control col-lg-12 login-input" data-ng-model="credentials.lastName" placeholder="Last Name" required data-toggle="popover" title="Guidance Note:" data-placement="right" data-trigger="focus" data-content="Your name will be kept private and will not be displayed to others" tabindex="2" />
+                    <input type="email" id="email" name="email" class="form-control col-lg-12 login-input" data-ng-model="credentials.email" placeholder="Email" required tabindex="4">
+                    <input type="password" id="password" name="password" class="form-control col-lg-12 login-input" data-ng-model="credentials.confirmPassword" placeholder="Confirm Password" required tabindex="6">
+                    <select id="location" name="location" class="form-control" data-ng-model="credentials.location" data-ng-show="selectedRole==='freelancer'" tabindex="8">
+                        <option value="">-- select --</option>
+                        <option data-ng-repeat="location in locations  | orderBy: 'name'" value={{location.name}}>{{location.name}}</option>
+                    </select>
+                </div>
+                <div class="">
+                    <!-- <div class="clear"></div> -->
+                    <input type="submit" class="btn btn-success logbtn" value="Create Account">
+                    <div class="clear"></div>
+                </div>
+                <div class="bottomborder DisplayB"> </div>
+                <div class="col-xs-12">
+                    <h4 class=" text-uppercase search-style  pull-left">Already have an account?</h4>
+                    <button type="button" class="btn btn-primary  logbtn pull-right">Login</button>
+                </div>
+                <div class="clear"></div>
+            </form>
+        </div>
+        <div class="col-xs-2"> </div>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            // $('[data-toggle="popover"]').popover();
+        });
+        document.body.className = "coverbg_signup";
+        function resetBackgroundImage(){
+        	document.body.className = "";
+        }
+        </script>
+        </script>
+</section>

@@ -1,0 +1,95 @@
+<section data-ng-controller="JobsController" data-ng-init="findOne()">
+    <div class="col-xs-2 list-group sidebar paddingleft left-side">
+        <ul class="list-unstyled">
+            <li>
+                <h4>Jobs Status</h4>
+            </li>
+            <li><a href="#">Jobs Posted<span class="pull-right">(4)</span></a></li>
+            <li>Live Jobs<span class="pull-right">(1)</span></li>
+            <li>Awarded Jobs<span class="pull-right">(0)</span></li>
+            <li>Awarded Ratio<span class="pull-right">0.0%</span></li>
+        </ul>
+        <ul class="list-unstyled">
+            <li>
+                <h4>Feedback Status</h4>
+            </li>
+            <li>Received<span class="pull-right">(1000)</span></li>
+            <li>Given<span class="pull-right">(0)</span></li>
+        </ul>
+    </div>
+
+  <div class="col-xs-8 talent-page borderpx">
+    <div>
+      <h1>{{job.name}}<span class="result pull-right capitalizet"></span></h1>
+    </div>
+    <div class="bottomborder-light"> </div> 
+    <div class="myjobdetail">
+    <div class="myjobdetail-info">
+    <p><a href="#!/jobs/by-category-id/{{job.subcategory.category._id}}">{{job.subcategory.category.name}}</a> / <a href="#!/jobs/by-subcategory-id/{{job.subcategory._id}}">{{job.subcategory.name}}</a><span class="pull-right" >
+        Status: 
+            <span class="live" data-ng-if="!job.isAwarded && job.status !== 'Pending'">Live</span>
+            <!-- <span class="live" >Completed</span> -->
+            <span class="live" data-ng-show="job.status === 'Pending'">Waiting for approval</span>
+            <span class="live" data-ng-if="job.isAwarded && job.status !== 'Pending'">Awarded</span>
+            <span class="live" ng-if="isJobExpired && !job.isAwarded && job.status !== 'Pending'">Expired</span>
+        </span>
+    </p>
+    <p>{{job.location}}, {{job.city}}, {{job.country}}<span class="pull-right">Posted on: {{job.created | date : 'd-MMM-yyyy'}}</span></p>
+    <p>Valid Until: {{job.ValidTill | date : 'd-MMM-yyyy'}}</p>
+    </div>
+<p>
+    {{job.description}}</p>
+
+    </div>
+    
+    <div ng-if="canApproveProposal">
+      <h1>Proposals Received<span class="result pull-right capitalizet"></span></h1>
+    </div>
+    <div class="bottomborder-light" ng-if="canApproveProposal"> </div>
+    <div class="post-container"  ng-if="canApproveProposal" ng-repeat="proposal in proposals">
+      <div class="pic-btn pull-left col-xs-2 margin0 padding0"> <img src="{{proposal.user.profilePictureURL}}" alt=""/> 
+        <a href="#" class="btn btn-success" ng-click="openChatWindow(proposal)">Contact</a>
+        <span ng-show="(!isJobExpired && (proposal.status === undefined || proposal.status === '' || proposal.status === 'pending'))"><a class="hyperlink" ng-click="openProposal(proposal)">View Proposal</a></span>
+        <a ng-click="giveFeedBack(proposal)" class="hyperlink" >Give Feedback</a>
+
+      </div>
+      <!-- pic-btn pull-left col-xs-2 -->
+      <div class="content col-xs-10">
+        <div class="heading-sec fullwidth">
+          <h2>{{proposal.user.displayName}}<span class="pull-right">
+            <i class="fa fa-star" aria-hidden="true" ng-if="proposal.user.averageRating >=1"></i>
+            <i class="fa fa-star" aria-hidden="true" ng-if="proposal.user.averageRating >=2"></i>
+            <i class="fa fa-star" aria-hidden="true" ng-if="proposal.user.averageRating >=3"></i>
+            <i class="fa fa-star" aria-hidden="true" ng-if="proposal.user.averageRating >=4"></i>
+            <i class="fa fa-star" aria-hidden="true" ng-if="proposal.user.averageRating >=5"></i>
+        </span> </h2>
+        </div>
+        <div class="fullwidth">
+          <p>{{proposal.user.cityStateCOuntry}} <span class="pull-right"> {{proposal.user.history.length}} Jobs </span> </p>
+          <p>Proposal Submitted on: {{proposal.created | date : 'd-MMM-yyyy'}}</p>
+        </div>
+        <p>
+        <p class=" colorBlue">Experience & qualifications</p> 
+        {{proposal.experience}} </p>
+        <p class="colorBlue">Cost & Duration</p>
+        <p>QAR {{proposal.myEarnings}}<span class="pull-right">{{proposal.estimatedDuration}}</span></p>
+
+        <!-- content col-xs-6 --> 
+        
+      </div>
+      <div class="clear"></div>
+      <div class="bottomborder-light "></div>
+    </div>
+     
+    <!--post-container close --> 
+    
+    <div class="load-btn aliencenter">
+    <button type="button" class="btn btn-primary btn-w170">Load More</button>
+    </div>
+    
+  </div>
+
+   <div ng-include="'./modules/core/views/partials/advertisement-panel.client.view.html'"></div>
+   
+    
+</section>

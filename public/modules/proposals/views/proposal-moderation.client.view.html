@@ -1,0 +1,35 @@
+<section class="row" data-ng-controller="ProposalsController" data-ng-init="loadProposalForModeration(); setState('Proposal Moderation'); authAdmin();">
+    <div ng-include="'./modules/categories/views/partials/admin-header.client.view.html'"></div>
+    <div class="col-md-10">
+        <div class="page-header">
+            <h1>Proposal Moderation</h1>
+        </div>
+        <table class="table table-hover" ng-hide="jobs.length == 0">
+        	<thead>
+        		<tr>
+	        		<th>Job</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Proposal By</th>
+	        		<th>Action</th>
+        		<tr>
+        	</thead>
+        	<tbody>
+        		<tr ng-repeat="proposal in proposals">
+        			<td>{{proposal.job.name}}</td>
+                    <td>{{proposal.created}}</td>
+        			<td>{{proposal.status}}</td>
+                    <td>{{proposal.user.displayName}}</td>
+        			<td><a class="hyperlink" ng-show = "proposal.status === 'pending'" ng-click="openProposalForAdminApproval(proposal)">Review</a>
+                        &nbsp; | &nbsp;
+                        <a class="hyperlink" ng-click="openProposalForAdminEdit(proposal)"> Edit</a>
+                    </td>
+        		</tr>
+        	</tbody>
+        </table>
+        <div ng-show="proposals.length == 0">
+        	<p class="alert alert-info">No Proposals left for Review.</p>
+        </div>
+    </div>
+
+</section>

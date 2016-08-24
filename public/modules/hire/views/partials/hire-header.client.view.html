@@ -1,0 +1,164 @@
+<div class="col-xs-2 list-group sidebar paddingleft left-side" data-ng-init="loadCountries(); listAllCities();">
+  
+    <ul class="list-unstyled">
+      <li>
+        <h4>REFINE YOUR SEARCH</h4>
+      </li>
+      <li>
+        <div class="btn-categr">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle sidebar-button " type="button" data-toggle="dropdown">Categories <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li data-ng-repeat="category in categories | orderBy: 'name'">
+                <a href="javascript:void(0)" 
+                ng-click="selectedCategory = category._id;selectedSubcategory=''; filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage); getBcCategory(selectedCategory);"
+                >{{category.name}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="btn-subc">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle sidebar-button " type="button" data-toggle="dropdown">Sub-categories <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li data-ng-repeat="subcategory in subcategories | orderBy: 'name'" >
+                <a href="javascript:void(0)"
+                ng-click="selectedSubcategory= subcategory._id; filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage); getBcSubcategory(selectedSubcategory);">{{subcategory.name}}</a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <ul class="list-unstyled stars">
+      <li>
+        <h4>Filter by RATING</h4>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" ng-model="atleastFeedback5" data-ng-change="filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage);">
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+      </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" ng-model="atleastFeedback4" data-ng-change="filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage);">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i> </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" ng-model="atleastFeedback3" data-ng-change="filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage);">
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i> 
+      </label>
+      </li>
+      <li>
+        <input type="checkbox" data-ng-change="filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, true, true, true, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage);">
+        ALL </li>
+    </ul>
+    
+    <ul class="list-unstyled">
+      <li>
+        <h4>Filter by jobs</h4>
+      </li>
+      <li>
+        <div class="btn-filterj">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle sidebar-button " type="button" data-toggle="dropdown">Completed Jobs <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">HTML</a></li>
+              <li><a href="#">CSS</a></li>
+              <li><a href="#">JavaScript</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <ul class="list-unstyled">
+      <li>
+        <h4>REFINE by LOCATION</h4>
+      </li>
+      <li>
+        <div class="btn-city">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle sidebar-button " type="button" data-toggle="dropdown">City <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li data-ng-repeat="city in cities  | orderBy: 'name'" >
+                <a href="javascript:void(0)"
+                ng-click="selectedCity = city.name;selectedLocation=''; listLocationsByCityId(selectedCity); filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage); getBcCity(selectedCity);"
+                >{{city.name}}</a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </li>
+      <div class="btn-area">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle sidebar-button " type="button" data-toggle="dropdown">Area <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li data-ng-repeat="location in locations  | orderBy: 'name'">
+            <a href="javascript:void(0)"
+                ng-click="selectedLocation = location.name; filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage); getBcLocation(selectedLocation);">{{location.name}}</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      </li>
+    </ul>
+   
+    <ul class="nav nav-pills nav-stacked" style="margin-top:10px;">
+            
+      
+        <!-- <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="atleastReviews5" data-ng-change="filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage);"> Atleast 5
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="atleastReviews4" data-ng-change="filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage);"> Atleast 4
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="atleastReviews3" data-ng-change="filterUsers(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, atleastFeedback5, atleastFeedback4, atleastFeedback3, atleastReviews5, atleastReviews4, atleastReviews3, pageSize, defaultPage);"> Atleast 3
+            </label>
+        </div> -->
+
+        <!-- <div class="form-group" >
+                    <label for="country">Country</label>
+                    <select data-ng-change="filterJobs(selectedCategory, selectedSubcategory, selectedCity, selectedLocation);" id="country" name="country" class="form-control" data-ng-model="country" disabled>
+                        <option data-ng-selected="country.name == 'Qatar'" data-ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
+                    </select>
+                </div> -->
+                    
+    </ul>   
+</div>
+
+
+
+<style type="text/css">
+
+    .nav-left {
+    list-style: none;
+    
+}
+</style>
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover(); 
+            // $('.popover').popover(); 
+            // $.material.init();
+        });
+    </script>

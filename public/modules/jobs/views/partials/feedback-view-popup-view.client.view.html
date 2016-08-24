@@ -1,0 +1,83 @@
+<div class="modal-header">
+    <h3 class="modal-title" data-ng-show="feedbackByUser._id == proposal.user._id">Feedback For {{jobBy.displayName}}</h3>
+    <h3 class="modal-title" data-ng-show="feedbackByUser._id == jobBy._id">Feedback For {{proposal.user.displayName}}</h3>
+
+    <!-- <h3 ng-hide="givenFeedBack.description === ''" class="modal-title">Feed Back Already Given to {{proposal.user.displayName}}!</h3> -->
+</div>
+<div class="modal-body">
+    <div class="proposal">
+        <div class="row">
+            <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="description">Your Feedback</label>
+                    <textarea class="form-control" rows="10" cols="100" data-ng-model="givenFeedback.description" placeholder="Describe how well job is done ....." id="description"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Overall Rating: </label>
+                    <star-rating data-ng-model="givenFeedback.rating" max="10" readonly="false"></star-rating>
+                  </div>
+                  <div data-ng-hide="givenFeedback.isByClient">
+                    <div class="form-group">
+                      <label>Friendliness: </label>
+                      <star-rating data-ng-model="givenFeedback.friendliness" max="10" readonly="false"></star-rating>
+                    </div>
+                    <div class="form-group">
+                      <label>Paid on Time: </label>
+                      <star-rating data-ng-model="givenFeedback.paidOnTime" max="10" readonly="false"></star-rating>
+                    </div>
+                    <div class="form-group">
+                      <label>Good Client: </label>
+                      <star-rating data-ng-model="givenFeedback.goodClient" max="10" readonly="false"></star-rating>
+                    </div>
+                    <div class="form-group">
+                      <label>Would you work for them again: </label>
+                      <star-rating data-ng-model="givenFeedback.workAgain" max="10" readonly="false"></star-rating>
+                    </div>
+                  </div>
+                 <!--  <div class="form-group" data-ng-show="givenFeedback.isByClient">
+                    <label for="totalPayment">Total Payment</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">QAR </div>
+                      <input type="text" class="form-control" ng-model="givenFeedback.totalPayment" id="exampleInputAmount" placeholder="Amount">
+                      <div class="input-group-addon">.00</div>
+                    </div>
+                  </div> -->
+                  <div class="checkbox" data-ng-show="givenFeedback.isByClient">
+                    <label>
+                      <input type="checkbox" ng-model="givenFeedback.isCompleted" > Job Completed?
+                    </label>
+                  </div>
+                  <small>Last Edit: {{givenFeedback.created | date : 'MMM d-yyyy HH:mm'}}</small>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+<div class="modal-footer">
+    <div class="row">
+      <div class="col-sm-12">
+        <button ng-show = "givenFeedBack._id === undefined || givenFeedBack._id === null " class="btn btn-primary" ng-click="post(proposal)">Post</button>
+        <button class="btn btn-warning" ng-click="cancel()">Close</button>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+    .proposal { 
+        
+    }
+    .proposal .profilelink{
+        font-size: 20px;
+    }
+    .proposal-footer{
+        padding: 3px;
+        background: #eee;
+    }
+</style>
+  <script type="text/javascript">
+        $(document).ready(function(){
+            // $('.popover').popover(); 
+            // $.material.init();
+        });
+    </script>

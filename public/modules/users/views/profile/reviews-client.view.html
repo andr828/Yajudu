@@ -1,0 +1,21 @@
+<section class="row" data-ng-controller="SettingsController" ng-init="initUserProfile();">
+
+	<div ng-include="'./modules/users/views/partials/profile-header.client.view.html'"></div>
+  <div class="col-sm-6">
+	<div ng-include="'./modules/users/views/partials/profile-header-user-intro-client-view.html'"></div>
+       <div class="col-md-4">
+              <h3>Reviews</h3>
+       </div>
+       <div class="col-md-8">
+         <div ng-repeat="feedback in history">
+               <h3><a data-ng-href="#!/jobs/{{feedback.job._id}}" > {{feedback.job.name}}</a></h3>
+               <star-rating data-ng-model="feedback.rating" max="10" readonly="true"></star-rating><br>
+               <div><b>Review</b>: {{feedback.description | limitTo: 300}}</div>
+             </div>
+              <div data-ng-hide="history">
+               <div>No Job History <span data-ng-show='querySkill'> For '{{querySkill.name}}'</span></div>
+             </div>
+       </div>
+  </div>
+
+</section>

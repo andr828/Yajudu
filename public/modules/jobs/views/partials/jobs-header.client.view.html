@@ -1,0 +1,98 @@
+<div class="col-xs-2 list-group sidebar paddingleft left-side" data-ng-init="loadCountries(); listAllCities();">
+    <ul class="list-unstyled">
+      <li>
+        <h4>REFINE YOUR SEARCH</h4>
+      </li>
+      <li>
+        <div class="btn-categr">
+          <div class="dropdown">
+
+            <select id="category" name="category" class="sidebar-button btn btn-default" data-ng-model="selectedCategory" data-ng-change="selectedSubcategory = ''; filterJobs(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, pageSize, defaultPage); getBcCategory(selectedCategory);">
+                <option value="">Categories</option>
+                <option data-ng-repeat="category in categories | orderBy: 'name'" value="{{category._id}}">{{category.name}}</option>
+            </select>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="btn-subc">
+          <div class="dropdown">
+            <select id="subcategory" name="subcategory" class="sidebar-button btn btn-default" data-ng-change="filterJobs(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, pageSize, defaultPage); getBcSubcategory(selectedSubcategory);" data-ng-model="selectedSubcategory">
+                <option value="">Sub-categories</option>
+                <option data-ng-show="subcategory.category._id === selectedCategory" data-ng-repeat="subcategory in allSubcategories | orderBy: 'name'" value="{{subcategory._id}}">{{subcategory.name}}</option>
+            </select>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <ul class="list-unstyled">
+      <li>
+        <h4>Filter by jobs</h4>
+      </li>
+      <li>
+        <div class="btn-filterj">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle sidebar-button " type="button" data-toggle="dropdown">Completed Jobs </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Completed Jobs</a></li>
+              <li><a href="#">Awarded Jobs</a></li>
+              <li><a href="#">Expired Jobs</a></li>
+              <li><a href="#" data-ng-click="recentlyExpiredJobs();">Rejected Jobs</a></li>
+
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <ul class="list-unstyled">
+      <li>
+        <h4>REFINE by LOCATION</h4>
+      </li>
+      <li>
+        <div class="btn-city">
+          <div class="dropdown">
+            <select ng-model="selectedCity" class="sidebar-button btn btn-default" data-ng-change="selectedLocation=''; listLocationsByCityId(selectedCity); filterJobs(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, pageSize, defaultPage); setBcCity(selectedCity);">
+              <option value="" >City</option>
+              <option data-ng-repeat="city in cities  | orderBy: 'name'"
+              value="{{city.name}}"
+              > {{city.name}}</option>
+            </select>
+
+                 
+          </div>
+        </div>
+      </li>
+      <div class="btn-area">
+        <div class="dropdown">
+          <!-- <button class="btn btn-default dropdown-toggle sidebar-button " type="button" data-toggle="dropdown">Area </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+          </ul> -->
+              <select id="location" name="location" class="sidebar-button btn btn-default" data-ng-model="selectedLocation" data-ng-change="filterJobs(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, pageSize, defaultPage); setBcLocation(selectedLocation);">
+                            <option value="" data-ng-selected="!selectedLocation" >Area</option>
+                            <option 
+                            data-ng-selected="location.name == selectedLocation" 
+                            data-ng-repeat="location in locations  | orderBy: 'name'" 
+                            value="{{location.name}}">{{location.name}}</option>
+                        </select>
+        </div>
+      </div>
+      </li>
+    </ul>
+    <!-- <ul class="nav nav-pills nav-stacked"> -->
+        <!--  <div class="form-group" >
+                    <label for="country">Country</label>
+                    <select data-ng-change="filterJobs(selectedCategory, selectedSubcategory, selectedCity, selectedLocation, pageSize, defaultPage);" id="country" name="country" class="form-control" data-ng-model="country" disabled>
+                        <option data-ng-selected="country.name == 'Qatar'" data-ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
+                    </select>
+                </div> -->
+                    
+
+    <!-- </ul> -->
+</div>
+
+ 
+
+</section>
